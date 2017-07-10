@@ -3,7 +3,7 @@ layout: post
 title: 多项式的伴随矩阵
 date: 2016-12-04 09:00:00
 tag:
-- algebra
+- linear algebra
 comment: true
 ---
 
