@@ -1,5 +1,6 @@
 # Dependencies
 markdown:         kramdown
+mathjax:          true
 
 # Permalinks
 permalink:        pretty
