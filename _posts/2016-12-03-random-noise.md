@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 连续白噪音和布朗噪音的离散模拟
-date: 2017-07-10 09:00:00
+date: 2016-12-03 09:00:00
 tag:
 - stochastic process
 - random noise
