@@ -43,7 +43,7 @@ displayed math
 
 $$
 \begin{pmatrix}
-A_{11} & A_{12}
+A_{11} & A_{12} \\
 A_{21} & A_{22}
 \end{pmatrix}
 $$
