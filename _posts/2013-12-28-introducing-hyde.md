@@ -37,7 +37,7 @@ Hyde is developed on and hosted with GitHub. Head to the <a href="https://github
 Thanks!
 
 # some tests
-inline math $ \min \|Ax+b\|^2 $
+inline math $ \min \\|Ax+b\\|^2 $
 
 displayed math
 
