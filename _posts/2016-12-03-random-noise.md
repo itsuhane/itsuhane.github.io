@@ -7,7 +7,7 @@ tag:
 - random noise
 - simulation
 comment: true
-----
+---
 
 为了生成模拟实验数据，需要用到白噪音和布朗噪音。连续白噪音 $u(t)$ 通常定义为满足如下条件的随机信号：
 $$
