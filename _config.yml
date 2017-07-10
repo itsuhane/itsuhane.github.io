@@ -1,0 +1,24 @@
+# Dependencies
+markdown:         kramdown
+
+# Permalinks
+permalink:        pretty
+
+# Setup
+title:            Title
+tagline:          'tagline'
+description:      'description'
+url:              http://itsuhane.github.io
+baseurl:          /
+
+author:
+  name:           'itsuhane'
+  url:            http://github.com/itsuhane
+
+paginate:         5
+
+# Custom vars
+version:          2.1.0
+
+#github:
+#  repo:           https://github.com/poole/hyde
