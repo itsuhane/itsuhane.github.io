@@ -5,9 +5,9 @@ markdown:         kramdown
 permalink:        pretty
 
 # Setup
-title:            Title
-tagline:          'tagline'
-description:      'description'
+title:            Epipolar
+tagline:          ''
+description:      'Currently a mirror of epipolar.tumblr.com, check back later.'
 url:              http://itsuhane.github.io
 baseurl:          /
 
@@ -18,7 +18,7 @@ author:
 paginate:         5
 
 # Custom vars
-version:          2.1.0
+#version:          2.1.0
 
 #github:
 #  repo:           https://github.com/poole/hyde
