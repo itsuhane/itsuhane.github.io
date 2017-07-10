@@ -17,23 +17,23 @@ $$
 
 背景故事讲完了，关于 RANSAC 具体的理论可以参考相关的文献。为了计算上面提到的 $N$ ，首先想到实现下面的代码：
 
-```
+~~~ C++
 size_t iteration_limit(double r, double P, size_t k) {
     double n = log(1-P) / log(1-pow(r, k));
     return (size_t)ceil(n);
 }
-```
+~~~
 
 然而这样朴素的实现是会导致数值溢出的问题的，具体表现在两个方面：运算结果超过 `size_t` 类型的上界和浮点数运算产生 +Inf/NaN 。
 
 一个一举两得的解决办法是使用下面的代码：
 
-```
+~~~ C++
 size_t iteration_limit(double r, double P, size_t k) {
    double n = log(1-P) / log(1-pow(r, k));
    return (size_t)ceil(std::min(1.0e10, n));
 }
-```
+~~~
 
 这里我们选择了一个很大但依然在 `size_t` 范围内的阈值。`std::min(a, b)` 会使用 `operator<` 返回两者中的较小值，并在两者相等时返回前者。根据 `std::min` 的语义，当 `n` 超过阈值，甚至为 +Inf 时，它可以保证结果为我们的阈值。而在 `n` 为 NaN 时，由于 `operator<` 总是 `false` ，它被“当做”相等，依旧返回前者，也就是阈值。这样就可以过滤掉所有不希望出现的结果了。
 
