@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "random thoughts"
+title: "Random Thoughts"
 date: 2016-12-22 09:00:50 GMT
 tags:
 - random thoughts
