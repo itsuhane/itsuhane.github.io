@@ -39,7 +39,7 @@ $$
 
 $$
 \begin{aligned}
-\frac{\partial \|r\|^2}{\partial x} &= 2r^T\frac{\partial r}{\partial x} = 0 \\\
+\frac{\partial \|r\|^2}{\partial x} &= 2r^T\frac{\partial r}{\partial x} = 0 \\
 \frac{\partial \rho(\|r\|)}{\partial x} &= \frac{d\rho}{dx} \frac{1}{\|r\|}r^T\frac{\partial r}{\partial x} = 0.
 \end{aligned}
 $$
