@@ -8,4 +8,4 @@ tag:
 comment: true
 ---
 
-![Daily Gaussian]({{site.url}}/assets/images/2016-12-02-daily-gaussian.png)
+![Daily Gaussian]({{ site.img }}/2016-12-02-daily-gaussian.png)

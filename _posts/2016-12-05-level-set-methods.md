@@ -7,8 +7,8 @@ tag:
 comment: true
 ---
 
-![normal-flow]({{ site.url }}/assets/images/2016-12-05-level-set-methods-1.gif)
+![normal-flow]({{ site.img }}/2016-12-05-level-set-methods-1.gif)
 
-![curvature-flow]({{ site.url }}/assets/images/2016-12-05-level-set-methods-2.gif)
+![curvature-flow]({{ site.img }}/2016-12-05-level-set-methods-2.gif)
 
 加了曲率项，步长要保守好多好多啊……
