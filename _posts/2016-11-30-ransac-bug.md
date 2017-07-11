@@ -1,8 +1,8 @@
 ---
 layout: post
 title: RANSAC和一个有趣的bug
-date: 2016-11-30 09:00:02
-tag:
+date: 2016-11-30 09:00:02 GMT
+tags:
 - RANSAC
 - bug
 comments: true

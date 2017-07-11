@@ -1,9 +1,9 @@
 ---
 layout: post
 title: First Post
-date: 2016-11-30 09:00:00
-tag:
-- 吐槽
+date: 2016-11-30 09:00:00 GMT
+tags:
+- random thoughts
 comments: true
 ---
 

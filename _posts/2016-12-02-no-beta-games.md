@@ -1,10 +1,10 @@
 ---
 layout: post
 title: 不想好好做游戏，那就不要做了
-date: 2016-12-02 09:00:00
-tag:
+date: 2016-12-02 09:00:00 GMT
+tags:
 - game
-- 吐槽
+- random thoughts
 comment: true
 ---
 

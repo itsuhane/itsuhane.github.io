@@ -1,12 +1,12 @@
 ---
 layout: post
 title: 记一个低级错误
-date: 2016-12-01 09:00:00
-tag:
+date: 2016-12-01 09:00:00 GMT
+tags:
 - C++
 - OOP
-- Virtual Function
-- Destructor
+- virtual function
+- destructor
 - bug
 comment: true
 ---

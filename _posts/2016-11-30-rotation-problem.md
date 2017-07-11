@@ -1,9 +1,11 @@
 ---
 layout: post
 title: A Rotation Problem
-date: 2016-11-30 09:00:01
-tag:
-- 问题
+date: 2016-11-30 09:00:01 GMT
+tags:
+- problem
+- rotation
+- linear algebra
 comments: true
 ---
 
