@@ -7,7 +7,7 @@ tags:
 comment: true
 ---
 
-对于函数 $h(x) = 0$ ，如果有向量函数 $f: \mathbb{R}^s \to \{x\in\mathbb{R}^n \| h(x)=0\}$ 使得 $h(f(p))=0$ ，并且 $f$ 为满射。那么流形 $h$ 上的最小二乘可以改写为：
+对于函数 $h(x) = 0$ ，如果有向量函数 $f: \mathbb{R}^s \to \\{x\in\mathbb{R}^n \| h(x)=0\\}$ 使得 $h(f(p))=0$ ，并且 $f$ 为满射。那么流形 $h$ 上的最小二乘可以改写为：
 
 $$
 \min \|r(f(x))\|^2.
