@@ -15,7 +15,7 @@ $$
 \min_x \|Ax-b\|^2 + \|Cx-d\|^2.
 $$
 
-我们引入个新的矩阵 $M = \begin{pmatrix}A\\\\C\end{pmatrix}$，把 $b$ 和 $d$ 连接成 $w=\begin{pmatrix}b\\d\end{pmatrix}$ 。那么上面的问题等价于
+我们引入个新的矩阵 $M = \begin{pmatrix}A\\\\C\end{pmatrix}$，把 $b$ 和 $d$ 连接成 $w=\begin{pmatrix}b\\\\d\end{pmatrix}$ 。那么上面的问题等价于
 
 $$
 \min_x \|Mx-w\|^2.
