@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Level Set Methods
-date: 2016-12-05 09:00:02
-tag:
+date: 2016-12-05 09:00:02 GMT
+tags:
 - level-set method
 comment: true
 ---

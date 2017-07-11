@@ -1,10 +1,11 @@
 ---
 layout: post
 title: 服气
-date: 2016-12-05 09:00:00
-tag:
-- LOL
+date: 2016-12-05 09:00:00 GMT
+tags:
+- lol
 - linear algebra
+- random thoughts
 comment: true
 ---
 

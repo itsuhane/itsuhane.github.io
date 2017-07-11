@@ -1,8 +1,8 @@
 ---
 layout: post
 title: 多项式的伴随矩阵
-date: 2016-12-04 09:00:00
-tag:
+date: 2016-12-04 09:00:00 GMT
+tags:
 - linear algebra
 comment: true
 ---

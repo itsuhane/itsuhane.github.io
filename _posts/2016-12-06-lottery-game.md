@@ -1,11 +1,11 @@
 ---
 layout: post
 title: 卡牌游戏
-date: 2016-12-06 09:00:00
-tag:
+date: 2016-12-06 09:00:00 GMT
+tags:
 - LOL
 - game
-- random
+- random thoughts
 comment: true
 ---
 
