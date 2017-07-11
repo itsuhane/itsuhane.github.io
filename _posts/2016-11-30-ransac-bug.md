@@ -18,7 +18,7 @@ $$
 
 背景故事讲完了，关于 RANSAC 具体的理论可以参考相关的文献。为了计算上面提到的 $N$ ，首先想到实现下面的代码：
 
-~~~ C++
+~~~ cpp
 size_t iteration_limit(double r, double P, size_t k) {
     double n = log(1-P) / log(1-pow(r, k));
     return (size_t)ceil(n);
@@ -29,7 +29,7 @@ size_t iteration_limit(double r, double P, size_t k) {
 
 一个一举两得的解决办法是使用下面的代码：
 
-~~~ C++
+~~~ cpp
 size_t iteration_limit(double r, double P, size_t k) {
    double n = log(1-P) / log(1-pow(r, k));
    return (size_t)ceil(std::min(1.0e10, n));
