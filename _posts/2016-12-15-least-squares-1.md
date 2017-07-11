@@ -12,7 +12,7 @@ comment: true
 最基础也是最关键的一种最小二乘问题便是线性最小二乘问题。线性最小二乘问题具有如下形式：
 
 $$
-\min_x \\|Ax-b\\|^2.
+\min_x \|Ax-b\|^2.
 $$
 
 在这里，矩阵 $A \in \mathbb{R}^{m\times n}$，且 $m\geq{}n$，$\mathrm{rank}A = n$ 。
