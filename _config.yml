@@ -11,15 +11,10 @@ tagline:          ''
 description:      'Currently a mirror of epipolar.tumblr.com, check back later.'
 url:              http://itsuhane.github.io
 baseurl:          /
+img:              http://itsuhane.github.io/images
 
 author:
   name:           'itsuhane'
   url:            http://github.com/itsuhane
 
 paginate:         5
-
-# Custom vars
-#version:          2.1.0
-
-#github:
-#  repo:           https://github.com/poole/hyde
