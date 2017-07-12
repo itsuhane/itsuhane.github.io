@@ -3,7 +3,7 @@ layout: post
 title: "Hard Coding"
 date: 2017-01-14 09:00:50 GMT
 tags:
-- LOL
+- lol
 comment: true
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: 卡牌游戏
 date: 2016-12-06 09:00:00 GMT
 tags:
-- LOL
+- lol
 - game
 - random thoughts
 comment: true
