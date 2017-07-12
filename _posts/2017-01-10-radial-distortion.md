@@ -4,7 +4,6 @@ title: "径向畸变的效果"
 date: 2017-01-10 09:00:53 GMT
 tags:
 - computer vision
-- camera
 comment: true
 ---
 
