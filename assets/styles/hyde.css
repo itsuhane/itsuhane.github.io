@@ -261,13 +261,11 @@ a.sidebar-nav-item:focus {
 .tag-list-item[post-count]:after {
     content: attr(post-count);
     position: absolute;
-    top: 5px;
-    right: -22px;
     font-size: .5em;
-    width: 17px;
-    height: 17px;
+    width: 15px;
+    height: 15px;
     text-align: center;
-    line-height: 17px;
+    line-height: 15px;
     border-radius: 50%;
     box-shadow: 0 0 1px #202020;
 }
