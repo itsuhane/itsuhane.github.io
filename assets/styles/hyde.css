@@ -248,3 +248,26 @@ a.sidebar-nav-item:focus {
 .theme-base-0f .related-posts li a:hover {
   color: #8f5536;
 }
+
+/* style for tag list */
+
+.tag-list-item {
+    color: #000;
+    margin: 20px;
+    white-space: nowrap;
+    position: relative;
+}
+
+.tag-list-item[post-count]:after {
+    content: attr(post-count);
+    position: absolute;
+    top: 5px;
+    right: -22px;
+    font-size: .5em;
+    width: 17px;
+    height: 17px;
+    text-align: center;
+    line-height: 15px;
+    border-radius: 50%;
+    box-shadow: 0 0 1px #202020;
+}
