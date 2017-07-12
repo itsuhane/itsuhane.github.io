@@ -8,20 +8,16 @@ title: "Tags"
     https://blog.brandonparsons.me/2015-using-tags-in-a-jekyll-blog-on-github-pages
 -->
 
-<div class='list-group'>
+<div class='tag-list'>
   {% assign tags_list = site.tags %}
 
   {% if tags_list.first[0] == null %}
     {% for tag in tags_list %}
-      <a href="/tags/#{{ tag | replace:' ','-' }}-ref" class='list-group-item'>
-        {{ tag }} <span class='badge'>{{ site.tags[tag].size }}</span>
-      </a>
+      <a href="/tags/#{{ tag | replace:' ','-' }}-ref" class="tag-list-item" post-count="{{ site.tags[tag].size }}">{{ tag }}</a>
     {% endfor %}
   {% else %}
     {% for tag in tags_list %}
-      <a href="/tags/#{{ tag[0] | replace:' ','-' }}-ref" class='list-group-item'>
-        {{ tag[0] }} <span class='badge'>{{ tag[1].size }}</span>
-      </a>
+      <a href="/tags/#{{ tag[0] | replace:' ','-' }}-ref" class="tag-list-item" post-count="{{ tag[1].size }}">{{ tag[0] }}</a>
     {% endfor %}
   {% endif %}
 
