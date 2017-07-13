@@ -45,17 +45,28 @@
           var timeout = false, // holder for timeout id
           delay = 250; // delay after event is "complete" to run callback
           var reflowMath = function () {
-            var dispFormulas = document.getElementsByClassName("formula");
+            var dispFormulas = document.getElementsByClassName("MathJax_Display");
             if (dispFormulas) {
               for (var i = 0; i < dispFormulas.length; i++) {
                 var dispFormula = dispFormulas[i];
-                var child = dispFormula.getElementsByClassName("MathJax_Preview")[0].nextSibling.firstChild;
+                var child = dispFormula.firstChild;
                 var isMultiline = MathJax.Hub.getAllJax(dispFormula)[0].root.isMultiline;
                 if (dispFormula.offsetWidth < child.offsetWidth || isMultiline) {
                   MathJax.Hub.Queue(["Rerender", MathJax.Hub, dispFormula]);
                 }
               }
             }
+            //var dispFormulas = document.getElementsByClassName("formula");
+            //if (dispFormulas) {
+            //  for (var i = 0; i < dispFormulas.length; i++) {
+            //    var dispFormula = dispFormulas[i];
+            //    var child = dispFormula.getElementsByClassName("MathJax_Preview")[0].nextSibling.firstChild;
+            //    var isMultiline = MathJax.Hub.getAllJax(dispFormula)[0].root.isMultiline;
+            //    if (dispFormula.offsetWidth < child.offsetWidth || isMultiline) {
+            //      MathJax.Hub.Queue(["Rerender", MathJax.Hub, dispFormula]);
+            //    }
+            //  }
+            //}
           };
           window.addEventListener('resize', function () {
             // clear the timeout
