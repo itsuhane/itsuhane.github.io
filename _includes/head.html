@@ -60,7 +60,7 @@
         });
         MathJax.Hub.Register.MessageHook("End Process", function (message) {
           var timeout = false, // holder for timeout id
-          delay = 250; // delay after event is "complete" to run callback
+          delay = 100; // delay after event is "complete" to run callback
           var reflowMath = function () {
             var dispFormulas = document.getElementsByClassName("equation");
             if (dispFormulas) {
@@ -68,7 +68,7 @@
                 var dispFormula = dispFormulas[i];
                 var child = dispFormula.getElementsByClassName("MathJax_Display")[0].nextSibling.firstChild;
                 var isMultiline = MathJax.Hub.getAllJax(dispFormula)[0].root.isMultiline;
-                if (dispFormula.offsetWidth < child.offsetWidth || isMultiline) {
+                if (dispFormula.offsetWidth < child.offsetWidth-5 || isMultiline) {
                   MathJax.Hub.Queue(["Rerender", MathJax.Hub, dispFormula]);
                 }
               }
