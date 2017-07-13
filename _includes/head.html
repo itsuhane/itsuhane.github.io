@@ -41,32 +41,35 @@
         processEscapes: true
       },
       AuthorInit: function () {
+        MathJax.Hub.Register.StartupHook("Begin", function () {
+          MathJax.Hub.Queue(function () {
+            document.getElementById("typeset").style.visibility = "";
+            var dispFormulas = document.getElementsByClassName("MathJax_Display");
+            if (dispFormulas) {
+              for (var i = 0; i < dispFormulas.length; i++) {
+                var vdiv = document.createElement("div");
+                vdiv.className = "equation";
+                dispFormulas[i].parentElement.insertBefore(vdiv, dispFormulas[i]);
+                vdiv.appendChild(dispFormulas[i]);
+              }
+            }
+          });
+        });
         MathJax.Hub.Register.MessageHook("End Process", function (message) {
           var timeout = false, // holder for timeout id
           delay = 250; // delay after event is "complete" to run callback
           var reflowMath = function () {
-            var dispFormulas = document.getElementsByClassName("MathJax_Display");
+            var dispFormulas = document.getElementsByClassName("equation");
             if (dispFormulas) {
               for (var i = 0; i < dispFormulas.length; i++) {
                 var dispFormula = dispFormulas[i];
-                var child = dispFormula.firstChild;
+                var child = dispFormula.getElementsByClassName("MathJax_Preview")[0].nextSibling.firstChild;
                 var isMultiline = MathJax.Hub.getAllJax(dispFormula)[0].root.isMultiline;
                 if (dispFormula.offsetWidth < child.offsetWidth || isMultiline) {
                   MathJax.Hub.Queue(["Rerender", MathJax.Hub, dispFormula]);
                 }
               }
             }
-            //var dispFormulas = document.getElementsByClassName("formula");
-            //if (dispFormulas) {
-            //  for (var i = 0; i < dispFormulas.length; i++) {
-            //    var dispFormula = dispFormulas[i];
-            //    var child = dispFormula.getElementsByClassName("MathJax_Preview")[0].nextSibling.firstChild;
-            //    var isMultiline = MathJax.Hub.getAllJax(dispFormula)[0].root.isMultiline;
-            //    if (dispFormula.offsetWidth < child.offsetWidth || isMultiline) {
-            //      MathJax.Hub.Queue(["Rerender", MathJax.Hub, dispFormula]);
-            //    }
-            //  }
-            //}
           };
           window.addEventListener('resize', function () {
             // clear the timeout
