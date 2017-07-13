@@ -47,10 +47,13 @@
             var dispFormulas = document.getElementsByClassName("MathJax_Display");
             if (dispFormulas) {
               for (var i = 0; i < dispFormulas.length; i++) {
+                var dispFormula = dispFormulas[i];
+                var dispFormulaMath = dispFormula.nextSibling;
                 var vdiv = document.createElement("div");
                 vdiv.className = "equation";
-                dispFormulas[i].parentElement.insertBefore(vdiv, dispFormulas[i]);
-                vdiv.appendChild(dispFormulas[i]);
+                dispFormula.parentElement.insertBefore(vdiv, dispFormula);
+                vdiv.appendChild(dispFormula);
+                vdiv.appendChild(dispFormulaMath);
               }
             }
           });
@@ -63,7 +66,7 @@
             if (dispFormulas) {
               for (var i = 0; i < dispFormulas.length; i++) {
                 var dispFormula = dispFormulas[i];
-                var child = dispFormula.getElementsByClassName("MathJax_Preview")[0].nextSibling.firstChild;
+                var child = dispFormula.getElementsByClassName("MathJax_Display")[0].nextSibling.firstChild;
                 var isMultiline = MathJax.Hub.getAllJax(dispFormula)[0].root.isMultiline;
                 if (dispFormula.offsetWidth < child.offsetWidth || isMultiline) {
                   MathJax.Hub.Queue(["Rerender", MathJax.Hub, dispFormula]);
