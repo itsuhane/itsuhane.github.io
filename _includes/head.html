@@ -68,7 +68,7 @@
                 var dispFormula = dispFormulas[i];
                 var child = dispFormula.getElementsByClassName("MathJax_Display")[0].nextSibling.firstChild;
                 var isMultiline = MathJax.Hub.getAllJax(dispFormula)[0].root.isMultiline;
-                if (dispFormula.offsetWidth < child.offsetWidth-5 || isMultiline) {
+                if (dispFormula.offsetWidth < child.offsetWidth-20 || isMultiline) {
                   MathJax.Hub.Queue(["Rerender", MathJax.Hub, dispFormula]);
                 }
               }
