@@ -272,4 +272,9 @@ a.sidebar-nav-item:focus {
 
 .equation {
     overflow: hidden;
+    margin: 1em 0em;
+}
+
+.equation .MathJax_Display {
+    margin: 0!important;
 }
