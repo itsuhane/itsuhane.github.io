@@ -4,7 +4,7 @@ title: "矩阵的 Schur 补"
 date: 2016-12-12 09:00:58 GMT
 tags:
 - linear algebra
-- schur complement
+- Schur complement
 comment: true
 ---
 在线性方程求解中，有一个重要的技巧叫做 Schur 补。
