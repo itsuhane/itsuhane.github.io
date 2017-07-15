@@ -4,8 +4,6 @@ title: 由平面引申出的射影变换
 date: 2016-12-01 09:00:01 GMT
 tags:
 - geometry
-- homography
-- parametrization
 comment: true
 ---
 
