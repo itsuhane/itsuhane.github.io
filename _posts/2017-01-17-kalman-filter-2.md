@@ -17,7 +17,7 @@ R_k^{-1} & -R_k^{-1}H_k & 0 \\
 \end{pmatrix}\begin{pmatrix}z_k \\ x_k \\ x_{k-1} \end{pmatrix} = \begin{pmatrix}
 0 \\
 Q_k^{-1}B_ku_k \\
-P_{k-1}^{-1}\hat{x}_{k-1|k-1}
+P_{k-1}^{-1}\hat{x}_{k-1 \given k-1}
 \end{pmatrix}
 $$
 
@@ -33,7 +33,7 @@ P_{k|k-1}^{-1}\hat{x}_{k|k-1} \\
 \end{pmatrix}
 $$
 
-这里 $$\hat{x}_{k\vert k-1} = B_ku_k+F_k\hat{x}_{k-1\vert k-1}$$ 是已知 $x_{k-1}$ 的概率分布时 $x_k$ 的后验概率分布的期望；而 $$P_{k\vert k-1} = F_kP_{k-1}F_k^T+Q_k$$ 是它的协方差。
+这里 $$\hat{x}_{k \given k-1} = B_ku_k+F_k\hat{x}_{k-1\given k-1}$$ 是已知 $x_{k-1}$ 的概率分布时 $x_k$ 的后验概率分布的期望；而 $$P_{k \given k-1} = F_kP_{k-1}F_k^T+Q_k$$ 是它的协方差。
 
 如果将上面的式子左侧进行块状 LDL 分解并依此进行整理，我们可以发现这个边缘化标准方程对应了一个新的（边缘化）最小二乘问题：
 
@@ -41,7 +41,7 @@ $$
 \min \left\|\begin{pmatrix}I & -H_k \\ 0 & I\end{pmatrix}\begin{pmatrix}z_k \\ x_k\end{pmatrix}-\begin{pmatrix}0 \\ \hat{x}_{k|k-1}\end{pmatrix}\right\|_{\Sigma_{k|k-1}^{-1}}^2
 $$
 
-这里的 $\Sigma_{k\|k-1}$ 是什么不妨自己根据前面的推导来观察一下。
+这里的 $$\Sigma_{k \given k-1}$$ 是什么不妨自己根据前面的推导来观察一下。
 
 此时，只要再条件化 $z_k$ ，我们就可以求解此时最优的 $x_k$ 了。不过在此之前我们先整理一下思路：
 

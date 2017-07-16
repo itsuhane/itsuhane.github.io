@@ -1,0 +1,74 @@
+  <script type="text/javascript">
+    window.MathJax = {
+      messageStyle: "none",
+      showMathMenu: false,
+      showMathMenuMSIE: false,
+      jax: ["input/TeX", "output/HTML-CSS"],
+      "HTML-CSS": { linebreaks: { automatic: true } },
+      extensions: ["tex2jax.js"],
+      TeX: {
+        extensions: ["AMSmath.js", "AMSsymbols.js", "autoload-all.js"],
+        Macros: {
+            {% include head-mathjax-macros.html %}
+          }
+      },
+      tex2jax: {
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      AuthorInit: function () {
+        MathJax.Hub.Register.StartupHook("Begin", function () {
+          MathJax.Hub.Queue(function () {
+            document.getElementById("typeset").style.visibility = "";
+            var dispFormulas = document.getElementsByClassName("MathJax_Display");
+            if (dispFormulas) {
+              for (var i = 0; i < dispFormulas.length; i++) {
+                var dispFormula = dispFormulas[i];
+                var dispFormulaMath = dispFormula.nextSibling;
+                var vdiv = document.createElement("div");
+                vdiv.className = "equation";
+                dispFormula.parentElement.insertBefore(vdiv, dispFormula);
+                vdiv.appendChild(dispFormula);
+                vdiv.appendChild(dispFormulaMath);
+              }
+            }
+          });
+        });
+        MathJax.Hub.Register.MessageHook("End Process", function (message) {
+          var timeout = false, // holder for timeout id
+          delay = 100; // delay after event is "complete" to run callback
+          var reflowMath = function () {
+            var dispFormulas = document.getElementsByClassName("equation");
+            if (dispFormulas) {
+              for (var i = 0; i < dispFormulas.length; i++) {
+                var dispFormula = dispFormulas[i];
+                var child = dispFormula.getElementsByClassName("MathJax_Display")[0].nextSibling.firstChild;
+                var isMultiline = MathJax.Hub.getAllJax(dispFormula)[0].root.isMultiline;
+                if (dispFormula.offsetWidth < child.offsetWidth-20 || isMultiline) {
+                  MathJax.Hub.Queue(["Rerender", MathJax.Hub, dispFormula]);
+                }
+              }
+            }
+          };
+          window.addEventListener('resize', function () {
+            // clear the timeout
+            clearTimeout(timeout);
+            // start timing for event "completion"
+            timeout = setTimeout(reflowMath, delay);
+          });
+        });
+      }
+    };
+
+    (function (d, script) {
+      script = d.createElement('script');
+      script.type = 'text/javascript';
+      script.async = true;
+      script.onload = function () {
+        // remote script has loaded
+      };
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js';
+      d.getElementsByTagName('head')[0].appendChild(script);
+    }(document));
+  </script>
