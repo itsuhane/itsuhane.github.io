@@ -24,3 +24,14 @@ author:
   url:            https://github.com/itsuhane
 
 paginate:         5
+
+defaults:
+-
+  scope:
+    path:         ""
+    type:         "posts"
+  values:
+    layout:       "post"
+    comment:      "true"
+    tags:         []
+
