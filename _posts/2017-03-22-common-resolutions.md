@@ -1,10 +1,8 @@
 ---
-layout: post
-title: "Photo post"
+title: "Chart of Common Resolutions"
 date: 2017-03-22 09:00:30 GMT
 tags:
 - cheatsheet
-comment: true
 ---
 
 ![image]({{ site.img }}/2017-03-22-common-resolutions.png)
