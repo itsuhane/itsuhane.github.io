@@ -1,3 +1,40 @@
+# Information
+title:            Epipolar
+url:              https://itsuhane.github.io
+baseurl:          ""
+
+assets:
+  styles:         /assets/styles
+  fonts:          /assets/fonts
+  scripts:        /assets/scripts
+  images:         /assets/images
+
+author:
+  name:           itsuhane
+  url:            https://github.com/itsuhane
+  email:          itsuhane@gmail.com
+  phone:          (000) 000-0000
+  address:        Zhejiang Univ.
+  address2:       Hangzhou, China
+  #twitter:
+  #facebook:       facebook
+  #instagram:      instagram
+  github:         itsuhane
+  #weibo:
+
+# Config for Menu
+menu:
+  hidden:         false  # <-- change to true if you want menu hidden on loaded
+
+defaults:
+  - scope:
+      path:       ""
+      type:       "posts"
+    values:
+      layout:     "post"
+      comment:    "true" # <-- change to false if you want comments off by-default
+      tags:       []
+
 # Dependencies
 markdown:         kramdown
 mathjax:          true
@@ -5,33 +42,6 @@ mathjax:          true
 # Permalinks
 permalink:        pretty
 
-# Setup
-title:            Epipolar
-tagline:          ''
-description:      'Currently a mirror of epipolar.tumblr.com, check back later.'
-url:              https://itsuhane.github.io
-baseurl:          /
-img:              https://itsuhane.github.io/images
-
-assets:
-  styles:         https://itsuhane.github.io/assets/styles
-  fonts:          https://itsuhane.github.io/assets/fonts
-  scripts:        https://itsuhane.github.io/assets/scripts
-  images:         https://itsuhane.github.io/assets/images
-
-author:
-  name:           'itsuhane'
-  url:            https://github.com/itsuhane
-
-paginate:         5
-
-defaults:
--
-  scope:
-    path:         ""
-    type:         "posts"
-  values:
-    layout:       "post"
-    comment:      "true"
-    tags:         []
-
+# Pagination
+paginate:         6
+paginate_path:    /page-:num/
