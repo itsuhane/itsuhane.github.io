@@ -9,7 +9,11 @@ layout: default
     {% for post in site.posts %}
     <article>
       {% capture full_url %}{{ site.baseurl }}{{ post.url }}{% endcapture %}
+      {% if post.banner %}
+      {% include link_image href=full_url url=post.banner %}
+      {% else %}
       {% include link_image href=full_url url="/pic01.jpg" %}
+      {% endif %}
       <h3>{{ post.title }}</h3>
       {{ post.excerpt }}
       <ul class="actions">
