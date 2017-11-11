@@ -1,14 +1,16 @@
+{% if paginator.total_posts >=1 %}
+{% for post in paginator.posts %}
 <section>
-  {% if paginator.total_posts >=1 %}
-  {% for post in paginator.posts %}
   <header class="main">
     <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
   </header>
   {{ post.content }}
-  <hr class="major" />
-  {% endfor %}
-  {% endif %}
-  {% if paginator.total_pages > 1 %}
+</section>
+{% endfor %}
+{% endif %}
+{% if paginator.total_pages > 1 %}
+<hr class="major" />
+<section>
   <ul class="pagination">
     <li>
       {% if paginator.previous_page %}
@@ -36,5 +38,5 @@
       {% endif %}
     </li>
   </ul>
-  {% endif %}
 </section>
+{% endif %}
