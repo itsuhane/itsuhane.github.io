@@ -1,8 +1,8 @@
 <section>
   {% if paginator.total_posts >=1 %}
   {% for post in paginator.posts %}
-  <header class="major">
-    <h2>{{ post.title }}</h2>
+  <header class="main">
+    <h2><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h2>
   </header>
   {{ post.content }}
   <hr class="major" />
