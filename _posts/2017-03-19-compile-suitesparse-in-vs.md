@@ -4,7 +4,7 @@ title: "Visual Studio 下编译 SuiteSparse"
 date: 2017-03-19 09:00:28 GMT
 tags:
 - C++
-comment: true
+banner: /2017-03-19-compile-suitesparse-in-vs.jpg
 ---
 
 工程中要使用来自 Google 的 [Ceres Solver](http://ceres-solver.org/) 。它可选依赖于 SuiteSparse ，加入之后可以大幅提高大型稀疏系统求解速度。然而在 Windows + Visual Studio 中编译 SuiteSparse 并不是一个容易的事情。之前我进行了一次编译，这里记录一下，供日后参考。
@@ -35,3 +35,5 @@ SuiteSparse 是使用 C 语言编写，本身采用了 Makefile 进行编译。�
 针对 SuiteSparse 4.5.3 版本，我用上面的方法建立了 Visual Studio 2015 的工程，请见 [SuiteSparse-MSVC](https://github.com/itsuhane/SuiteSparse-MSVC) 。利用它，可以不借助 GNU Make 完成 SuiteSparse 的编译。也就减少了部分配置环境的负担。
 
 当然，这不是长久之计，更应该对 SuiteSparse 的项目管理工具进行升级，改用诸如 CMake 等的工具自动根据需要生成上面的包装代码文件。
+
+（封面图来自 [Prof. Tim Davis](http://faculty.cse.tamu.edu/davis/) ）

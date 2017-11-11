@@ -3,6 +3,7 @@ title: "Wikipedia Visualized"
 date: 2017-03-24 09:00:35 GMT
 tags:
 - link
+banner: /2017-03-24-wiki-graph.png
 ---
 
 > ## [CauseGraph](https://causegraph.github.io/causalaxies/#/galaxy/dbpedia?l=1)
