@@ -4,13 +4,11 @@ title: "小软件：Hourglass"
 date: 2017-01-04 09:00:47 GMT
 tags:
 - tool
-comment: true
+banner: /2017-01-04-hourglass.png
 ---
 
 > ## [Hourglass - The simple countdown timer for Windows](https://chris.dziemborowicz.com/apps/hourglass/)
 > Hourglass is the most advanced simple countdown timer for Windows. Just enter a time in just about any format, and hit Enter.
-
-![hourglass]({{ site.img }}/2017-01-04-hourglass.png)
 
 一个漂亮并且精简的倒计时小工具~
 
