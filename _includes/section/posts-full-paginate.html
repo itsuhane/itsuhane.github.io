@@ -1,9 +1,14 @@
 {% if paginator.total_posts >=1 %}
 {% for post in paginator.posts %}
 <section>
+  {% if post.title %}
   <header class="main">
     <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
   </header>
+  {% endif %}
+  {% if post.banner %}
+  {% include span_image url=post.banner %}
+  {% endif %}
   {{ post.content }}
 </section>
 {% endfor %}
