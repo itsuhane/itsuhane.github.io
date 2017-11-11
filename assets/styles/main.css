@@ -2560,15 +2560,18 @@
 		.image img {
 			border-radius: 0.375em;
 			display: block;
+			max-width: 100%;
+			height: auto;
+			width: auto\9; /* ie8 */
 		}
 
 		.image.left, .image.right {
 			max-width: 40%;
 		}
 
-			.image.left img, .image.right img {
-				width: 100%;
-			}
+		.image.left img, .image.right img {
+			width: 100%;
+		}
 
 		.image.left {
 			float: left;
