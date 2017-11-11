@@ -7,5 +7,8 @@ layout: default
     <h1>{{ page.title }}</h1>
   </header>
   {% endif %}
+  {% if page.banner %}
+  {% include span_image url=page.banner pos="right" %}
+  {% endif %}
   {{ content }}
 </section>
