@@ -1,0 +1,40 @@
+<section>
+  {% if paginator.total_posts >=1 %}
+  {% for post in paginator.posts %}
+  <header class="major">
+    <h2>{{ post.title }}</h2>
+  </header>
+  {{ post.content }}
+  <hr class="major" />
+  {% endfor %}
+  {% endif %}
+  {% if paginator.total_pages > 1 %}
+  <ul class="pagination">
+    <li>
+      {% if paginator.previous_page %}
+      <a href="{{ site.baseurl }}{{ paginator.previous_page_path }}" class="button">Prev</a>
+      {% else %}
+      <span class="button disabled">Prev</span>
+      {% endif %}
+    </li>
+    {% for page in (1..paginator.total_pages) %}
+    <li>
+      {% if page == paginator.page %}
+      <span class="page active">{{ page }}</span>
+      {% elsif page == 1 %}
+      <a href="{{ site.baseurl }}/" class="page">{{ page }}</a>
+      {% else %}
+      <a href="{{ site.baseurl }}{{ site.paginate_path | replace: ':num', page }}" class="page">{{ page }}</a>
+      {% endif %}
+    </li>
+    {% endfor %}
+    <li>
+      {% if paginator.next_page %}
+      <a href="{{ site.baseurl }}{{ paginator.next_page_path }}" class="button">Next</a>
+      {% else %}
+      <span class="button disabled">Next</span>
+      {% endif %}
+    </li>
+  </ul>
+  {% endif %}
+</section>
