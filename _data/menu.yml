@@ -1,0 +1,4 @@
+- name: Homepage
+  url: /
+- name: Posts
+  url: /posts/

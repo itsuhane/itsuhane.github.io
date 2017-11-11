@@ -1,32 +1,89 @@
-<div class="sidebar">
-  <div class="container sidebar-sticky">
-    <div class="sidebar-about">
-      <h1>
-        <a href="{{ site.baseurl }}">
-          {{ site.title }}
-        </a>
-      </h1>
-      <p class="lead">{{ site.description }}</p>
-    </div>
-
-    <nav class="sidebar-nav">
-      <a class="sidebar-nav-item{% if page.url == site.baseurl %} active{% endif %}" href="{{ site.baseurl }}">Home</a>
-
-      {% comment %}
-        The code below dynamically generates a sidebar nav of pages with
-        `layout: page` in the front-matter. See readme for usage.
-      {% endcomment %}
-
-      {% assign pages_list = site.pages %}
-      {% for node in pages_list %}
-        {% if node.title != null %}
-          {% if node.layout == "page" %}
-            <a class="sidebar-nav-item{% if page.url == node.url %} active{% endif %}" href="{{ node.url }}">{{ node.title }}</a>
+<!-- Sidebar -->
+{%if site.menu.hidden %}
+<div id="sidebar" class="inactive">
+{% else %}
+<div id="sidebar">
+{% endif %}
+  <div class="inner">
+    <!-- Search -->
+    <section id="search" class="alt">
+      <form method="post" action="#">
+        <input type="text" name="query" id="query" placeholder="Search" />
+      </form>
+    </section>
+    <!-- Menu -->
+    <nav id="menu">
+      <header class="major">
+        <h2>Menu</h2>
+      </header>
+      {% if site.data.menu[0] %}
+      <ul>
+        {% for item in site.data.menu %}
+        <li>
+          {% if item.items[0] %}
+          <span class="opener">{{ item.name }}</span>
+          <ul>
+            {% for subitem in item.items %}
+            <li><a href="{{ site.baseurl }}{{ subitem.url }}">{{ subitem.name }}</a></li>
+            {% endfor %}
+          </ul>
+          {% else %}
+          <a href="{{ site.baseurl }}{{ item.url }}">{{ item.name }}</a>
           {% endif %}
-        {% endif %}
-      {% endfor %}
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
     </nav>
-
-    <p>&copy; {{ site.time | date: '%Y' }}. All rights reserved.</p>
+    <!-- Section -->
+    <section>
+      <header class="major">
+        <h2>Ante interdum</h2>
+      </header>
+      <div class="mini-posts">
+        <article>
+          {% include link_image href="#" url="/pic07.jpg" %}
+          <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+        </article>
+        <article>
+          {% include link_image href="#" url="/pic08.jpg" %}
+          <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+        </article>
+        <article>
+          {% include link_image href="#" url="/pic09.jpg" %}
+          <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+        </article>
+      </div>
+      <ul class="actions">
+        <li><a href="#" class="button">More</a></li>
+      </ul>
+    </section>
+    <!-- Section -->
+    <section>
+      <header class="major">
+        <h2>Get in touch</h2>
+      </header>
+      <p>Sed varius enim lorem ullamcorper dolore aliquam aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin sed aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+      <ul class="contact">
+        {% if site.author.url %}
+        <li class="fa-envelope-o"><a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a></li>
+        {% endif %}
+        {% if site.author.phone %}
+        <li class="fa-phone">{{ site.author.phone }}</li>
+        {% endif %}
+        {% if site.author.address %}
+        <li class="fa-home">
+          {{ site.author.address }}
+          {% if site.author.address2 %}
+          <br/>{{ site.author.address2 }}
+          {% endif %}
+        </li>
+        {% endif %}
+      </ul>
+    </section>
+    <!-- Footer -->
+    <footer id="footer">
+      <p class="copyright">&copy; {{ site.title }}. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>. Jekyll port: <a href="https://itsuhane.github.io">itsuhane</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+    </footer>
   </div>
 </div>

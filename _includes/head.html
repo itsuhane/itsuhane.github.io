@@ -1,29 +1,6 @@
-<head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-
-  <!-- Enable responsiveness on mobile devices-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-  {% if page.title == "Home" %}
-    <title>{{ site.title }}</title>
-  {% else %}
-    <title>{{ page.title }} &middot; {{ site.title }}</title>
-  {% endif %}
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="{{ site.baseurl }}assets/styles/poole.css">
-  <link rel="stylesheet" href="{{ site.baseurl }}assets/styles/syntax.css">
-  <link rel="stylesheet" href="{{ site.baseurl }}assets/styles/hyde.css">
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
-
-  <!-- Icons -->
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ site.baseurl }}assets/images/apple-touch-icon-144-precomposed.png">
-                                 <link rel="shortcut icon" href="{{ site.baseurl }}assets/images/favicon.ico">
-
-  <!-- RSS -->
-  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
-
-  {% include head-mathjax.html %}
-</head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<!--[if lte IE 8]><script src="{{ site.baseurl }}{{ site.assets.scripts }}/ie/html5shiv.js"></script><![endif]-->
+<link rel="stylesheet" href="{{ site.baseurl }}{{ site.assets.styles }}/main.css" />
+<!--[if lte IE 9]><link rel="stylesheet" href="{{ site.baseurl }}{{ site.assets.styles }}/ie9.css" /><![endif]-->
+<!--[if lte IE 8]><link rel="stylesheet" href="{{ site.baseurl }}{{ site.assets.styles }}/ie8.css" /><![endif]-->
