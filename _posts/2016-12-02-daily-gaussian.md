@@ -5,7 +5,6 @@ date: 2016-12-02 09:00:01 GMT
 tags:
 - Gaussian
 - lol
-comment: true
+banner: /2016-12-02-daily-gaussian.png
 ---
 
-![Daily Gaussian]({{ site.img }}/2016-12-02-daily-gaussian.png)

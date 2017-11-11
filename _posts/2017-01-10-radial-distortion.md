@@ -4,10 +4,8 @@ title: "径向畸变的效果"
 date: 2017-01-10 09:00:53 GMT
 tags:
 - computer vision
-comment: true
+banner: /2017-01-10-radial-distortion.gif
 ---
-
-![radial distortion]({{ site.img }}/2017-01-10-radial-distortion.gif)
 
 Effect of Radial Distortion
 
