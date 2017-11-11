@@ -29,6 +29,8 @@ menu:
   miniposts:      false
   contact:        false
 
+disqus_id:        epipolar
+
 defaults:
   - scope:
       path:       ""
