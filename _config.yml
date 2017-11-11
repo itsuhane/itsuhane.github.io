@@ -16,15 +16,18 @@ author:
   phone:          (000) 000-0000
   address:        Zhejiang Univ.
   address2:       Hangzhou, China
+  github:         itsuhane
   #twitter:
   #facebook:       facebook
   #instagram:      instagram
-  github:         itsuhane
   #weibo:
 
 # Config for Menu
 menu:
   hidden:         false  # <-- change to true if you want menu hidden on loaded
+  search:         false
+  miniposts:      false
+  contact:        false
 
 defaults:
   - scope:
