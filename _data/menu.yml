@@ -1,4 +1,34 @@
-- name: Homepage
+- name: 主页
   url: /
-- name: Posts
+- name: 所有文章
   url: /posts/
+- name: 最小二乘问题
+  items:
+    - name: 单变量最小二乘、它的解和它的标准方程
+      url: "#"
+    - name: 增加变量、增加项
+      url: "#"
+    - name: 多变量多余项的线性最小二乘一般形式
+      url: "#"
+    - name: 线性最小二乘的概率背景——正态分布最大似然估计
+      url: "#"
+    - name: 非线性最小二乘、线性化、Gauss-Newton
+      url: "#"
+    - name: 鲁棒函数和加权的最小二乘
+      url: "#"
+    - name: Wahba 问题——带几何约束的最小二乘例子
+      url: "#"
+    - name: 流形上最小二乘的一般思路
+      url: "#"
+    - name: 旋转变量的优化、李群上的最小二乘
+      url: "#"
+    - name: 线性问题中秩亏系数矩阵的处理
+      url: "#"
+    - name: 非线性问题中秩亏 Jacobian 的处理、Levenberg-Marquardt 算法
+      url: "#"
+    - name: 秩亏 Jacobian 的危险、信赖域算法
+      url: "#"
+    - name: 固定优化变量——条件化
+      url: "#"
+    - name: 忽略优化变量——边缘化
+      url: "#"
