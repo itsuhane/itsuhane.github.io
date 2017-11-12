@@ -35,7 +35,7 @@ Ceres Solver 的编译比起 SuiteSparse 就更加需要耐心了。主要原因
 
 ……但是故事远没有这么简单，一般情况下，你会发现 CMake 提示了各种 NOT FOUND……
 
-{% include span_image url="/2017-03-21-compile-ceres-3.png" %}
+{% include span_image url="/2017-03-21-compile-ceres-3.jpg" %}
 
 冷静，这个时候就需要一些小小的魔法，怎么做呢？在 CMake 的界面里点击那个 Add Entry，添加一个叫做 BLA_STATIC 的布尔值，设置为 True 。
 
@@ -43,7 +43,7 @@ Ceres Solver 的编译比起 SuiteSparse 就更加需要耐心了。主要原因
 
 ……然后你会发现，旧的 NOT FOUND 还在，还出现了三个新的 NOT FOUND ……
 
-{% include span_image url="/2017-03-21-compile-ceres-4.png" %}
+{% include span_image url="/2017-03-21-compile-ceres-4.jpg" %}
 
 不过冷静对比一下，你会发现新出现的 NOT FOUND 恰好对应了我们在 Link Line Advisor 中得到的三个文件名。把这三个文件的完整路径对照填进去，再次打开 SuiteSparse ，配置。
 
