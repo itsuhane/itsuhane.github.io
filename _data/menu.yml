@@ -5,30 +5,30 @@
 - name: 最小二乘问题
   items:
     - name: 单变量最小二乘、它的解和它的标准方程
-      url: "#"
+      url: /2016/12/15/least-squares-1/
     - name: 增加变量、增加项
-      url: "#"
+      url: /2016/12/17/least-squares-2/
     - name: 多变量多余项的线性最小二乘一般形式
-      url: "#"
+      url: /2016/12/19/least-squares-3/
     - name: 线性最小二乘的概率背景——正态分布最大似然估计
-      url: "#"
+      url: /2016/12/21/least-squares-4/
     - name: 非线性最小二乘、线性化、Gauss-Newton
-      url: "#"
+      url: /2016/12/23/least-squares-5/
     - name: 鲁棒函数和加权的最小二乘
-      url: "#"
+      url: /2016/12/26/least-squares-6/
     - name: Wahba 问题——带几何约束的最小二乘例子
-      url: "#"
+      url: /2016/12/28/least-squares-7/
     - name: 流形上最小二乘的一般思路
-      url: "#"
+      url: /2016/12/30/least-squares-8/
     - name: 旋转变量的优化、李群上的最小二乘
-      url: "#"
+      url: /2017/01/01/least-squares-9/
     - name: 线性问题中秩亏系数矩阵的处理
-      url: "#"
+      url: /2017/01/03/least-squares-10/
     - name: 非线性问题中秩亏 Jacobian 的处理、Levenberg-Marquardt 算法
-      url: "#"
+      url: /2017/01/05/least-squares-11/
     - name: 秩亏 Jacobian 的危险、信赖域算法
-      url: "#"
+      url: /2017/01/07/least-squares-12/
     - name: 固定优化变量——条件化
-      url: "#"
+      url: /2017/01/09/least-squares-13/
     - name: 忽略优化变量——边缘化
-      url: "#"
+      url: /2017/01/11/least-squares-14/
