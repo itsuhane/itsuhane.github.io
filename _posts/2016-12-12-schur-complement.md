@@ -5,11 +5,10 @@ date: 2016-12-12 09:00:58 GMT
 tags:
 - linear algebra
 - Schur complement
-comment: true
 ---
 在线性方程求解中，有一个重要的技巧叫做 Schur 补。
 
-设分块矩阵 $A=\begin{pmatrix}A_{11}  &  A_{12} \\  A_{21} & A_{22}\end{pmatrix}$ ，其中 $A_{11}$ 可逆。在线性方程 $Ax=b$ 中，对 $x$ 和 $b$ 以兼容的方式分块，可以得到：
+设分块矩阵 $A=\begin{pmatrix}A_{11} & A_{12} \\\\ A_{21} & A_{22}\end{pmatrix}$ ，其中 $A_{11}$ 可逆。在线性方程 $Ax=b$ 中，对 $x$ 和 $b$ 以兼容的方式分块，可以得到：
 
 $$
 \begin{pmatrix}
