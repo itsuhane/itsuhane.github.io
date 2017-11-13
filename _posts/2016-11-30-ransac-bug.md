@@ -1,6 +1,6 @@
 ---
 layout: post
-title: RANSAC和一个有趣的bug
+title: RANSAC 和一个有趣的 bug
 date: 2016-11-30 09:00:02 GMT
 tags:
 - RANSAC
