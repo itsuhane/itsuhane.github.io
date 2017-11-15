@@ -6,6 +6,8 @@ layout: default
     <h2>Posts</h2>
   </header>
   <div class="posts">
+    {% capture _LINE_FEED %}
+    {% endcapture %}
     {% for post in site.posts %}
     {% capture ptags %}
     {% if post.tags %}
@@ -17,7 +19,7 @@ layout: default
     {% endif %}
     {% endcapture %}
     <!--
-      {{ ptags }}
+      {{ ptags | split: _LINE_FEED | join: "," }}
     -->
     <article>
       {% capture full_url %}{{ site.baseurl }}{{ post.url }}{% endcapture %}
@@ -31,5 +33,6 @@ layout: default
       </ul>
     </article>
     {% endfor %}
+    {% assign _LINE_FEED = nil %}
   </div>
 </section>
