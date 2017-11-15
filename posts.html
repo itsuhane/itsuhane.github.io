@@ -9,17 +9,13 @@ layout: default
     {% capture _LINE_FEED %}
     {% endcapture %}
     {% for post in site.posts %}
-    {% capture ptags %}
     {% if post.tags %}
-    {% for tag in post.tags %}
-    '{{ tag }}'
-    {% endfor %}
+    {% assign ptags = post.tags %}
     {% else %}
-    'untagged'
+    {% assign ptags = "untagged" | split: "," %}
     {% endif %}
-    {% endcapture %}
     <!--
-      {{ ptags | strip_newlines }}
+      {{ ptags | join: "," | downcase }}
     -->
     <article>
       {% capture full_url %}{{ site.baseurl }}{{ post.url }}{% endcapture %}
