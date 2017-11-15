@@ -8,11 +8,15 @@ layout: default
   </header>
   <div class="row">
     <ul class="actions small">
-      {% assign all_tags = site.posts | map: "tags" %}
-      {% for tag in all_tags %}
+      {% if site.tags.first[0] %}
+      {% for tag in site.tags %}
       <li><a href="#" class="button small">{{ tag }}</a></li>
       {% endfor %}
-      {% assign all_tags = nil %}
+      {% for tag in site.tags %}
+      <li><a href="#" class="button small">{{ tag[0] }}</a></li>
+      {% endfor %}
+      {% else %}
+      {% endif %}
     </ul>
   </div>
 </section>
