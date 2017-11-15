@@ -19,7 +19,7 @@ layout: default
     {% endif %}
     {% endcapture %}
     <!--
-      {{ ptags | split: _LINE_FEED | compact | join: "," }}
+      {{ ptags | strip_newlines }}
     -->
     <article>
       {% capture full_url %}{{ site.baseurl }}{{ post.url }}{% endcapture %}
