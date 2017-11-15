@@ -11,7 +11,7 @@ layout: default
       {% assign all_tags = site.posts | map: "tags" %}
       {% for tag in all_tags %}
       <li><a href="#" class="button small">{{ tag }}</a></li>
-      {% endif %}
+      {% endfor %}
       {% assign all_tags = nil %}
     </ul>
   </div>
