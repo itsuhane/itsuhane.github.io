@@ -1,12 +1,13 @@
 ---
 layout: default
 ---
+{% comment %}
 {% if site.tags %}
 <section>
   <header class="major">
     <h2>Tags</h2>
   </header>
-  <div class="row">
+  <div>
     <ul class="actions small">
       {% if site.tags.first[0] %}
       {% for tag in site.tags %}
@@ -21,6 +22,7 @@ layout: default
   </div>
 </section>
 {% endif %}
+{% endcomment %}
 <section>
   <header class="major">
     <h2>Posts</h2>
