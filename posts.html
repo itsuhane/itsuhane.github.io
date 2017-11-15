@@ -10,12 +10,12 @@ layout: default
     <ul class="actions small">
       {% if site.tags.first[0] %}
       {% for tag in site.tags %}
-      <li><a href="#" class="button small">{{ tag }}</a></li>
-      {% endfor %}
-      {% for tag in site.tags %}
       <li><a href="#" class="button small">{{ tag[0] }}</a></li>
       {% endfor %}
       {% else %}
+      {% for tag in site.tags %}
+      <li><a href="#" class="button small">{{ tag }}</a></li>
+      {% endfor %}
       {% endif %}
     </ul>
   </div>
