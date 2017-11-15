@@ -7,6 +7,18 @@ layout: default
   </header>
   <div class="posts">
     {% for post in site.posts %}
+    {% capture ptags %}
+    {% if post.tags %}
+    {% for tag in post.tags %}
+    '{{ tag }}'
+    {% endfor %}
+    {% else %}
+    'untagged'
+    {% endif %}
+    {% endcapture %}
+    <!--
+      {{ ptags }}
+    -->
     <article>
       {% capture full_url %}{{ site.baseurl }}{{ post.url }}{% endcapture %}
       {% if post.banner %}
