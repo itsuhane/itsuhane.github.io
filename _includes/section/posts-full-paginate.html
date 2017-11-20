@@ -1,4 +1,7 @@
-{% if paginator.total_posts >=1 %}
+{% if paginator.page == 1 %}
+{% include section/banner.html %}
+{% endif %}
+{% if paginator.total_posts >= 1 %}
 {% for post in paginator.posts %}
 <section>
   {% if post.title %}
