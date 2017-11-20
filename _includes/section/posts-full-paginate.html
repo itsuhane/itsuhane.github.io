@@ -3,7 +3,7 @@
 {% endif %}
 {% if paginator.total_posts >= 1 %}
 {% for post in paginator.posts %}
-<section>
+<section id="main-posts">
   {% if post.title %}
   <header class="main">
     <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
