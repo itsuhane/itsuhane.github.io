@@ -14,4 +14,6 @@ $$
 
 求解令上面问题最优的 $x$ ，则 $x$ 中非零项所在的维度便对应了想要的 $f_i$ 所在的维度。更具体地说，$x_i = \mathrm{sgn}(f_i)\cdot\max(\|f_i\|-\lambda, 0)$ 。这个操作等于**将 $f$ 的所有元素向零方向收缩 $\lambda$**，因此得名  shrinkage 。
 
+{% include span_image url="/2017-11-20-thresholding-optimization.png" %}
+
 从这个看似简单的优化，可以扩展出很多复杂的数学工具，包括著名的 LASSO 和 SVT 算法。
