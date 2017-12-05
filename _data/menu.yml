@@ -32,3 +32,5 @@
       url: /2017/01/09/least-squares-13/
     - name: 忽略优化变量——边缘化
       url: /2017/01/11/least-squares-14/
+    - name: QR 分解与 Cholesky 分解
+      url: /2017/12/05/least-squares-15/
