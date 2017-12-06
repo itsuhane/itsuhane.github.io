@@ -34,3 +34,11 @@
       url: /2017/01/11/least-squares-14/
     - name: QR 分解与 Cholesky 分解
       url: /2017/12/05/least-squares-15/
+- name: 常用参考
+  items:
+    - name: cppreference.com
+      url: http://en.cppreference.com/w/
+    - name: Eigen 3 documentation
+      url: https://eigen.tuxfamily.org/dox/index.html
+    - name: OpenCV documentation(master)
+      url: https://docs.opencv.org/master/
