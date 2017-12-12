@@ -40,5 +40,7 @@
       url: http://en.cppreference.com/w/
     - name: Eigen 3 documentation
       url: https://eigen.tuxfamily.org/dox/index.html
-    - name: OpenCV documentation(master)
+    - name: OpenCV documentation
       url: https://docs.opencv.org/master/
+    - name: CGAL manual
+      url: https://doc.cgal.org/latest/Manual/index.html
