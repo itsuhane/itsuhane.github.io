@@ -70,4 +70,4 @@ cv::Mat YUV420_to_BGR888(
 }
 ```
 
-在上面的代码里，我假定了 `width` 和 `height` 都是偶数，奇数的情形还请自行处理。此外，可以看到我这里对 YCbCr 和 YUV 不加区分的使用了，这两者根据场合还是存在不同的。fourcc 的网站上提供了比较详细的信息，可以参考 [YUV pixel formats](www.fourcc.org/yuv.php) 和 [YUV to RGB Conversion](http://www.fourcc.org/fccyvrgb.php) 。
+在上面的代码里，我假定了 `width` 和 `height` 都是偶数，奇数的情形还请自行处理。此外，可以看到我这里对 YCbCr 和 YUV 不加区分的使用了，这两者根据场合还是存在不同的。fourcc 的网站上提供了比较详细的信息，可以参考 [YUV pixel formats](http://www.fourcc.org/yuv.php) 和 [YUV to RGB Conversion](http://www.fourcc.org/fccyvrgb.php) 。
