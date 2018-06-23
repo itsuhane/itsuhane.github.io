@@ -4,8 +4,8 @@ title: "Visual Studio 下编译 SuiteSparse"
 date: 2017-03-19 09:00:28 GMT
 tags:
 - C++
-banner: /2017-03-19-compile-suitesparse-in-vs.jpg
 ---
+{% include assets/image url="/2017-03-19-compile-suitesparse-in-vs.jpg" %}
 
 工程中要使用来自 Google 的 [Ceres Solver](http://ceres-solver.org/) 。它可选依赖于 SuiteSparse ，加入之后可以大幅提高大型稀疏系统求解速度。然而在 Windows + Visual Studio 中编译 SuiteSparse 并不是一个容易的事情。之前我进行了一次编译，这里记录一下，供日后参考。
 

@@ -1,0 +1,5 @@
+{% if include.name %}
+<link rel="stylesheet" href="{{ site.assets.styles }}/{{ include.name }}.css">
+{% elsif include.url %}
+<link rel="stylesheet" href="{{ include.url }}">
+{% endif %}

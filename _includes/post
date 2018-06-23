@@ -1,0 +1,9 @@
+<h1>
+{%if include.url %}
+<a href="{{ site.url }}{{ site.baseurl }}{{ include.url }}">{{ include.title }}</a>
+{% else %}
+{{ include.title }}
+{% endif %}
+</h1>
+<span class="post-date"><i class="fa fa-calendar" aria-hidden="true"></i> {{ include.date | date_to_string }}{% include features/read-time content=include.content %}</span>
+{{ include.content }}

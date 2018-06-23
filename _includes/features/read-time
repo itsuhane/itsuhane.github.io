@@ -1,0 +1,11 @@
+{% if site.data.features.read-time > 0 %}
+{% assign words = include.content | strip_html | strip_newlines | split:"" | size %}
+- <i class="fa fa-clock-o" aria-hidden="true"></i>
+{% if words < site.data.features.read-time %}
+less than 1 minute read
+{% elsif words < site.data.features.read-time*2 %}
+1 minute read
+{% else %}
+{{ words | divided_by:site.data.features.read-time }} minute read
+{% endif %}
+{% endif %}

@@ -1,40 +1,17 @@
-<!DOCTYPE HTML>
-<!--
-  Editorial by HTML5 UP, Jekyll Port by itsuhane
-  html5up.net | @ajlkn, itsuhane.github.io
-  Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
+<!doctype html>
 {% if site.lang %}
 <html lang="{{ site.lang }}">
 {% else %}
 <html>
 {% endif %}
-  <head>
-    {% if page.title %}
-    <title>{{ page.title }} - {{ site.title }}</title>
-    {% else %}
-    <title>{{ site.title }}</title>
-    {% endif %}
-    {% include head.html %}
-  </head>
-  <body>
-    <!-- Wrapper -->
-    <div id="wrapper">
-      <!-- Main -->
-      <div id="main">
-        <div class="inner">
-          <!-- Header -->
-          {% include header.html %}
-          <!-- Content -->
-          {{ content }}
-          <!-- Disqus -->
-          {% include disqus.html %}
-        </div>
-      </div>
-      <!-- Sidebar -->
-      {% include sidebar.html %}
+{% include layouts/head %}
+<body>
+  <div class="container">
+    {% include layouts/header %}
+    <div class="post-container">
+      {{ content }}
     </div>
-    <!-- Scripts -->
-    {% include scripts.html %}
-  </body>
+    {% include layouts/footer %}
+  </div>
+</body>
 </html>

@@ -1,0 +1,20 @@
+{%if site.data.features.related-posts %}
+<div class="related">
+  <h1>Related Posts</h1>
+  {% assign listed_posts_urls = page.url | split: ' ' %}
+  <ul class="related-posts">
+    {% for tag in page.tags %}
+      {% for other_post in site.tags[tag] limit:3 %}
+        {% unless listed_posts_urls contains other_post.url %}
+          <li>
+            <h3>
+              <a href="{{ site.url }}{{ site.baseurl }}{{ other_post.url }}">{{ other_post.title }}</a>
+            </h3>
+          </li>
+          {% assign listed_posts_urls = listed_posts_urls | push: other_post.url %}
+        {% endunless %}
+      {% endfor %}
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}

@@ -1,14 +1,7 @@
 ---
 layout: default
 ---
-<section>
-  {% if page.title %}
-  <header class="main">
-    <h1>{{ page.title }}</h1>
-  </header>
-  {% endif %}
-  {% if page.banner %}
-  {% include span_image url=page.banner %}
-  {% endif %}
-  {{ content }}
-</section>
+{% include post title=page.title date=page.date content=content %}
+{% include features/social-sharing %}
+{% include features/related-posts %}
+{% include features/disqus %}

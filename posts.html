@@ -1,50 +1,21 @@
 ---
-layout: default
+layout: page
+title: All Posts
 ---
-{% comment %}
-{% if site.tags %}
-<section>
-  <header class="major">
-    <h2>Tags</h2>
-  </header>
-  <div>
-    <ul class="actions small">
-      {% if site.tags.first[0] %}
-      {% for tag in site.tags %}
-      <li><a href="#" class="button small">{{ tag[0] }}</a></li>
-      {% endfor %}
-      {% else %}
-      {% for tag in site.tags %}
-      <li><a href="#" class="button small">{{ tag }}</a></li>
-      {% endfor %}
-      {% endif %}
-    </ul>
-  </div>
-</section>
-{% endif %}
-{% endcomment %}
-<section>
-  <header class="major">
-    <h2>Posts</h2>
-  </header>
-  <div class="posts">
-    {% for post in site.posts %}
-    {% if post.tags %}
-    {% assign ptags = post.tags %}
+<ul class="posts">
+  {% for post in site.posts %}
+    {% unless post.next %}
+      <h3>{{ post.date | date: '%Y' }}</h3>
     {% else %}
-    {% assign ptags = "untagged" | split: "," %}
-    {% endif %}
-    <article class="searchable" post-tags="{{ ptags | join: ", " | downcase }}">
-      {% capture full_url %}{{ site.baseurl }}{{ post.url }}{% endcapture %}
-      {% if post.banner %}
-      {% include link_image href=full_url url=post.banner %}
+      {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
+      {% capture nyear %}{{ post.next.date | date: '%Y' }}{% endcapture %}
+      {% if year != nyear %}
+        <h3>{{ post.date | date: '%Y' }}</h3>
       {% endif %}
-      <h3>{{ post.title }}</h3>
-      {{ post.excerpt }}
-      <ul class="actions">
-        <li><a href="{{ full_url }}" class="button">More</a></li>
-      </ul>
-    </article>
-    {% endfor %}
-  </div>
-</section>
+    {% endunless %}
+    <li itemscope>
+      <a href="{{ site.url }}{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+      <p class="post-date"><span><i class="fa fa-calendar" aria-hidden="true"></i> {{ post.date | date: "%B %-d" }}{% include features/read-time content=post.content %}</span></p>
+    </li>
+  {% endfor %}
+</ul>

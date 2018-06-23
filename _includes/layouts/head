@@ -1,0 +1,15 @@
+<head>
+  <title>{% if page.title == "Home" %}{{ site.title }}{% else %}{{ page.title }} | {{ site.title }}{% endif %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  {% include assets/style name="main" %}
+  {% include assets/style name="syntax" %}
+  {% include features/feed %}
+  {% include assets/style url="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400" %}
+  {% include assets/style url="https://fonts.googleapis.com/css?family=Source+Code+Pro" %}
+  {% include assets/style url="https://fonts.googleapis.com/css?family=Quattrocento+Sans" %}
+  {% include assets/style url="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" %}
+  {% include features/mathjax %}
+  {% include features/google-analytics %}
+  {% include features/seo %}
+</head>

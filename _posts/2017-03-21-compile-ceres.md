@@ -23,7 +23,7 @@ Ceres Solver 的编译比起 SuiteSparse 就更加需要耐心了。主要原因
 
 为了使用这一版本的 MKL，要到 [Intel® Math Kernel Library Link Line Advisor](https://software.intel.com/en-us/articles/intel-mkl-link-line-advisor/) 上获得应当链接的正确的库，参考配置如下图：
 
-{% include span_image url="/2017-03-21-compile-ceres-1.png" %}
+{% include assets/image url="/2017-03-21-compile-ceres-1.png" %}
 
 与此同时，如果使用的是 MKL 的动态链接版本，日后使用 Ceres 的程序总是要带着各种 DLL 的小尾巴，显得很不方便。结合我自己的情况，我选择使用静态链接的版本，上图中对应了 Select dynamic or static linking: Static 。
 
@@ -31,11 +31,11 @@ Ceres Solver 的编译比起 SuiteSparse 就更加需要耐心了。主要原因
 
 首先，为了要让它出现 BLAS 的配置，我们需要告诉它“我要用 SuiteSparse！”，接下来 CMake 就会去找 SuiteSparse，然后发现它依赖 BLAS，然后发现找不到，然后来傻乎乎问你 BLAS 在哪儿，从而诱导出 BLAS 相关的配置。
 
-{% include span_image url="/2017-03-21-compile-ceres-2.png" %}
+{% include assets/image url="/2017-03-21-compile-ceres-2.png" %}
 
 ……但是故事远没有这么简单，一般情况下，你会发现 CMake 提示了各种 NOT FOUND……
 
-{% include span_image url="/2017-03-21-compile-ceres-3.jpg" %}
+{% include assets/image url="/2017-03-21-compile-ceres-3.jpg" %}
 
 冷静，这个时候就需要一些小小的魔法，怎么做呢？在 CMake 的界面里点击那个 Add Entry，添加一个叫做 BLA_STATIC 的布尔值，设置为 True 。
 
@@ -43,11 +43,11 @@ Ceres Solver 的编译比起 SuiteSparse 就更加需要耐心了。主要原因
 
 ……然后你会发现，旧的 NOT FOUND 还在，还出现了三个新的 NOT FOUND ……
 
-{% include span_image url="/2017-03-21-compile-ceres-4.jpg" %}
+{% include assets/image url="/2017-03-21-compile-ceres-4.jpg" %}
 
 不过冷静对比一下，你会发现新出现的 NOT FOUND 恰好对应了我们在 Link Line Advisor 中得到的三个文件名。把这三个文件的完整路径对照填进去，再次打开 SuiteSparse ，配置。
 
-{% include span_image url="/2017-03-21-compile-ceres-5.png" %}
+{% include assets/image url="/2017-03-21-compile-ceres-5.png" %}
 
 经过这么一番折腾，终于见到了曙光。如果一切正确的话，CMake 便会提示找到 BLAS 和 LAPACK，并为你打开 SuiteSparse 的相关配置（又是一大堆的路径等待你人肉）。全部添加好，再一次配置，如果全部通过，就可以生成用于编译的工程了。
 

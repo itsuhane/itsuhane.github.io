@@ -1,0 +1,13 @@
+{% if include.icon %}
+{% if site.data.features.feed == "atom" %}
+<a href="{{ site.url }}{{ site.baseurl }}/feed.xml" target="_blank"><i class="fa fa-rss-square" aria-hidden="true"></i></a>
+{% elsif site.data.features.feed == "rss" %}
+<a href="{{ site.url }}{{ site.baseurl }}/rss-feed.xml" target="_blank"><i class="fa fa-rss-square" aria-hidden="true"></i></a>
+{% endif %}
+{% else %}
+{% if site.data.features.feed == "atom" %}
+{% feed_meta %}
+{% elsif site.data.features.feed == "rss" %}
+<link href="{{ site.url }}{{ site.baseurl }}/rss-feed.xml" type="application/rss+xml" rel="alternate" title="{{ site.title }} | {{ site.description }}"/>
+{% endif %}
+{% endif %}

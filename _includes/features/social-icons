@@ -1,0 +1,4 @@
+{% for item in site.data.social.items %}
+<a href="{{ item.link }}" target="_blank"><i class="fa fa-{{ item.icon }}" aria-hidden="true"></i></a>
+{% endfor %}
+{% include features/feed icon=true %}
