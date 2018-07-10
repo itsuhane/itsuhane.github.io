@@ -25,6 +25,12 @@ $$
 
 此外，我们有一些有用的关系：
 
+1. $\exp(\delta R) = I+[\delta R]_\times$
+2. $\exp(\delta R)U = U\exp(U^\top\delta R)$
+3. $\log(U\exp(\delta R)) = \log U + J_r^{-1}(\log U)\delta R$
+
+注意由于 $\delta R$ 是微元，上面三个关系的等号可以认为成立，否则第一和第三个关系只在 $\delta R$ 比较小时近似成立。
+
 ## 常见基本形式的导数
 
 ### 1. 三维点的旋转
