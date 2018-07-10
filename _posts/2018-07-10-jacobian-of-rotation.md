@@ -2,8 +2,9 @@
 title: 旋转变量求导
 date: 2018-07-10 11:35:00 GMT
 tags:
-- Jacobian
-- Geometry
+- calculus
+- algebra
+- rotation
 ---
 
 在涉及空间三维运动的问题中经常会遇到含有旋转变量的能量，最优化这样的能量时，便需要对旋转变量进行求导。
