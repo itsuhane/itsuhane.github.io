@@ -2,4 +2,8 @@
 layout: docs-page
 ---
 
-Nothing is here yet, come check back often!
+# 有的时候，没有时间写完整的文章……
+
+所以这里是未整理的笔记区，今后会把一些尚不足以成文的零散内容记录在这里。
+
+不妨偶尔来看看～
