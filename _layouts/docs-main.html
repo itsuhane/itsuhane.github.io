@@ -22,6 +22,9 @@
       homepage: 'main/index.html',
       loadSidebar: 'sidebar/index.html',
       loadNavbar: 'navbar/index.html',
+      alias: {
+        '/(.*)/' : '/$1/index.html'
+      },
       plugins: [
         function (hook) {
           hook.doneEach(function () {
