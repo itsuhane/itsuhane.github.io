@@ -5,7 +5,7 @@
     showMathMenu: false,
     showMathMenuMSIE: false,
     jax: ["input/TeX", "output/HTML-CSS"],
-    "HTML-CSS": { linebreaks: { automatic: true } },
+    "HTML-CSS": { linebreaks: { automatic: true }, fonts: [ "TeX" ] },
     extensions: ["tex2jax.js"],
     TeX: {
       extensions: ["AMSmath.js", "AMSsymbols.js", "autoload-all.js"],

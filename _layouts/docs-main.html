@@ -10,6 +10,7 @@
   <meta charset="utf-8">
   <title>{% if page.title == "Home" %}{{ site.title }}{% else %}{{ page.title }} - {{ site.title }}{% endif %}</title>
   {% include assets/style url="//unpkg.com/docsify/lib/themes/vue.css" %}
+  {% include features/mathjax %}
 </head>
 <body>
   <div data-app id="docs-main"></div>
