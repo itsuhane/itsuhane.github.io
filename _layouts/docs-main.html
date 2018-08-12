@@ -10,7 +10,6 @@
   <meta charset="utf-8">
   <title>{% if page.title == "Home" %}{{ site.title }}{% else %}{{ page.title }} - {{ site.title }}{% endif %}</title>
   {% include assets/style url="//unpkg.com/docsify/lib/themes/vue.css" %}
-  {% include features/mathjax %}
 </head>
 <body>
   <div data-app id="docs-main"></div>
@@ -22,9 +21,20 @@
       themeColor: '#505050',
       homepage: 'main/index.html',
       loadSidebar: 'sidebar/index.html',
-      loadNavbar: 'navbar/index.html'
+      loadNavbar: 'navbar/index.html',
+      plugins: [
+        function (hook) {
+          hook.doneEach(function () {
+            if (typeof MathJax !== 'undefined') {
+              MathJax.Hub.Queue(["Typeset", MathJax.Hub])
+            }
+          })
+        }
+      ]
     }
   </script>
   {% include assets/script url="//unpkg.com/docsify/lib/docsify.min.js" %}
+  {% include assets/script url="//unpkg.com/docsify/lib/plugins/external-script.min.js" %}
+  {% include features/mathjax %}
 </body>
 </html>
