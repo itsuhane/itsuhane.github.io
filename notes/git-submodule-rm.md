@@ -1,5 +1,5 @@
 ---
-Layout: docs-page
+layout: docs-page
 ---
 
 ```bash
