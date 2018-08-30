@@ -1,3 +1,7 @@
+---
+layout: docs-page
+---
+
 Euler says:
 $$
 v-e+f = 2
