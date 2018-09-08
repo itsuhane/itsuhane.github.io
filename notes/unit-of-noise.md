@@ -1,5 +1,4 @@
 ---
-layout: docs-page
 ---
 
 $$
@@ -45,4 +44,3 @@ $$
 [\sigma_{ba}] &= \frac{\mathrm{m}}{\mathrm{sec}^3}\frac{1}{\sqrt{\mathrm{Hz}}}
 \end{align}
 $$
-

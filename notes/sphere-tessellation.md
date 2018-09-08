@@ -1,5 +1,4 @@
 ---
-layout: docs-page
 ---
 
 Euler says:

@@ -1,5 +1,4 @@
 ---
-layout: docs-page
 ---
 
 Singleton is a commonly used pattern in C++. Typically, it is implemented with a managed static variable.
