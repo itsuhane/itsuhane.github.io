@@ -7,3 +7,4 @@
   * [Sphere tessellation](#/sphere-tessellation/)
   * [Meyers singleton](#/meyers-singleton/)
   * [正确使用 CMakeList.txt](#/cmakelists/)
+  * [Bloat-free Ubuntu](#/bloat-free-ubuntu/)
