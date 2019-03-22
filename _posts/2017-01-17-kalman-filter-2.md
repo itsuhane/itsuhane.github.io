@@ -17,7 +17,7 @@ R_k^{-1} & -R_k^{-1}H_k & 0 \\
 \end{pmatrix}\begin{pmatrix}z_k \\ x_k \\ x_{k-1} \end{pmatrix} = \begin{pmatrix}
 0 \\
 Q_k^{-1}B_ku_k \\
-P_{k-1}^{-1}\hat{x}_{k-1 \given k-1}
+P_{k-1}^{-1}\hat{x}_{k-1 \given k-1} - F_k^T Q_k^{-1}B_ku_k
 \end{pmatrix}
 $$
 

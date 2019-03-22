@@ -34,6 +34,13 @@ sudo apt-get install --no-install-recommends gnome-session gnome-panel gnome-she
 
 If this is enough, you can jump to "Start up the GUI" section.
 
+I personally recommend lightdm+awesome for a minimum-distraction environment (Well, you should really consider using ArchLinux in the first place.)
+
+```bash
+sudo apt-get install --no-install-recommends xorg lightdm lightdm-gtk-greeter awesome awesome-extra termit
+sudo service lightdm start
+```
+
 ## Necessary GUI tools
 
 Without `gnome-terminal`, GUI is useless. `synaptic` provides package management under the GUI.
@@ -54,7 +61,7 @@ If you want to tweak gnome configurations:
 sudo apt-get install --no-install-recommends gnome-tweak-tool gnome-shell-extensions
 ```
 
-For some early versions of Ubuntu (14.04 trusty for example), `gnome-tweak-tool` may have a small bug preventing some settings being saved. 
+For some early versions of Ubuntu (14.04 trusty for example), `gnome-tweak-tool` may have a small bug preventing some settings being saved.
 
 Use following fix:
 
