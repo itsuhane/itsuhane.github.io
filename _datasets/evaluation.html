@@ -1,0 +1,45 @@
+---
+layout: page
+title: Some Visualization
+permalink: /evaluation/
+scripts: [ "https://cdn.plot.ly/plotly-latest.min.js" ]
+---
+<div id="plot_canvas" style="width:100%;height:500px;"></div>
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const group = urlParams.get('group');
+  const traj = urlParams.get('traj');
+  const dataset = "{{ site.url }}{{ site.base_url }}/datasets/"+group+"/"+traj+"/";
+  console.log(dataset);
+  function unpack(arr, key) {
+    return arr.map(function(e) {
+      return e[key];
+    });
+  }
+  Plotly.d3.json(dataset,
+    function(err, data) {
+      console.log(err);
+      var pos = unpack(data.trajectory, 'p_wb');
+      var x = unpack(pos, '0');
+      var y = unpack(pos, '1');
+      var z = unpack(pos, '2');
+      Plotly.plot('plot_canvas', [{
+        type: 'scatter3d',
+        mode: 'lines',
+        x: x,
+        y: y,
+        z: z,
+        opacity: 1
+      }], {
+        autosize: true,
+        margin: { l: 0, r: 0, b:0, t:0 },
+        scene: {
+          aspectmode: 'data'
+        }
+      }, { responsive:true });
+    }
+  )
+  window.onresize = function () {
+    Plotly.Plots.resize('plot_canvas');
+  };
+</script>

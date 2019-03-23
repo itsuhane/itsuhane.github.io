@@ -12,4 +12,9 @@
   {% include features/mathjax %}
   {% include features/google-analytics %}
   {% include features/seo %}
+  {% if page.scripts %}
+    {% for script in page.scripts %}
+      {% include assets/script url=script %}
+    {% endfor %}
+  {% endif %}
 </head>
