@@ -1,5 +1,5 @@
 {% if include.name %}
-  <script type="text/javascript" src="{{ site.assets.styles }}/{{ include.name }}.js"></script>
+  <script type="text/javascript" src="{{ site.assets.scripts }}/{{ include.name }}.js"></script>
 {% elsif include.url %}
   <script type="text/javascript" src="{{ include.url }}"></script>
 {% endif %}

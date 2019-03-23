@@ -14,7 +14,11 @@
   {% include features/seo %}
   {% if page.scripts %}
     {% for script in page.scripts %}
-      {% include assets/script url=script %}
+      {% if script.name %}
+        {% include assets/script name=script.name %}
+      {% else %}
+        {% include assets/script url=script.url %}
+      {% endif %}
     {% endfor %}
   {% endif %}
 </head>

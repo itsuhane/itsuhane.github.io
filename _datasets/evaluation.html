@@ -1,10 +1,210 @@
 ---
 layout: page
-title: Some Visualization
+title: SLAM Evaluation
 permalink: /evaluation/
-scripts: [ "https://cdn.plot.ly/plotly-latest.min.js" ]
+# scripts:
+#   - name: "plotly.min"
+#   - name: "progressbar.min"
+datasets:
+  - id: "euroc"
+    name: "EuRoC"
+    sequences:
+      - id: "v1-01"
+        name: "V1_01_easy"
+      - id: "v1-02"
+        name: "V1_02_medium"
+      - id: "v1-03"
+        name: "V1_03_difficult"
+      - id: "v2-01"
+        name: "V2_01_easy"
+      - id: "v2-02"
+        name: "V2_02_medium"
+      - id: "v2-03"
+        name: "V2_03_difficult"
+      - id: "mh-01"
+        name: "MH_01_easy"
+      - id: "mh-02"
+        name: "MH_02_easy"
+      - id: "mh-03"
+        name: "MH_03_medium"
+      - id: "mh-04"
+        name: "MH_04_difficult"
+      - id: "mh-05"
+        name: "MH_05_difficult"
 ---
+<style>
+.bicolumn {
+  display: inline-block;
+  width: 48%;
+}
+select, input {
+  width: 80%;
+}
+@media (max-width: 30em) {
+  .bicolumn {
+    width: 98%;
+  }
+
+  .bicolumn dl {
+    margin: 0;
+  }
+}
+</style>
+<div class="bicolumn">
+<dl>
+  <dt><label for="dataset">Dataset</label></dt>
+  <dd><select name="dataset" id="dataset">
+  {% for dataset in page.datasets %}
+    <option value="{{ dataset.id }}">{{ dataset.name }}</option>
+  {% endfor %}
+  </select></dd>
+  <dt><label for="sequence">Sequence</label></dt>
+  <dd><select name="sequence" id="sequence">
+  </select></dd>
+</dl>
+</div><div class="bicolumn">
+<dl>
+  <dt><label for="format">Format</label></dt>
+  <dd><select name="format" id="format">
+    <option value="tum">TUM</option>
+    <option value="csv">CSV</option>
+  </select></dd>
+  <dt><label for="trajectory">Trajectory</label></dt>
+  <dd><input type="file" name="trajectory" id="trajectory" /></dd>
+</dl>
+</div>
+<div class="highlight">
+  Trajectory File Format
+  <pre id="example" class="highlight"></pre>
+</div>
+<script>
+  var dataset_element = document.getElementById('dataset');
+  var sequence_element = document.getElementById('sequence');
+  var format_element = document.getElementById('format');
+  var trajectory_element = document.getElementById('trajectory');
+  var example_element = document.getElementById('example');
+
+  var datasets = {
+  {% for dataset in page.datasets %}
+    '{{ dataset.id }}': {
+    {% for sequence in dataset.sequences %}
+      '{{ sequence.id }}': {
+        'name': '{{ sequence.name }}'
+      },
+    {% endfor %}
+    },
+  {% endfor %}
+  };
+
+  function fetchSequenceData(dataset, sequence, progress, success, error) {
+    var xhr = new XMLHttpRequest();
+    var url = "/datasets/"+dataset+"/"+sequence+"/";
+    xhr.open("GET", url, true);
+    xhr.onprogress = function(e) {
+      progress(e.loaded, e.total);
+    };
+    xhr.onload = function(e) {
+      if(xhr.readyState === 4 && xhr.status === 200) {
+        success(xhr.responseText);
+      } else {
+        error(xhr.statusText);
+      }
+    };
+    xhr.onerror = function(e) {
+      error(xhr.statusText);
+    };
+    xhr.send(null);
+  }
+
+  var refreshSequences = (function (d,dat,seq) {
+    return function() {
+      while(seq.length > 0) {
+        seq.remove(0);
+      }
+      var sequences = d[dat.options[dat.selectedIndex].value]
+      for (s in sequences) {
+        var option = document.createElement("option");
+        option.value = s;
+        option.text = sequences[s].name;
+        seq.add(option);
+      }
+    };
+  })(
+    datasets,
+    dataset_element,
+    sequence_element
+  );
+  var showFormatExample = (function(fmt,example) {
+    return function() {
+      var format = (fmt.options[fmt.selectedIndex].value);
+      if (format=='tum') {
+        example.textContent = '<t[s]> <p.x[m]> <p.y[m]> <p.z[m]> <q.x> <q.y> <q.z> <q.w>';
+      }
+      if (format=='csv') {
+        example.textContent = '<t[s]>, <p.x[m]>, <p.y[m]>, <p.z[m]>, <q.x>, <q.y>, <q.z>, <q.w>';
+      }
+    };
+  })(
+    format_element,
+    example_element
+  );
+  var evalTrajectory = (function(dat, seq, fmt, traj) {
+    return function(e) {
+      var dataset = dat.options[dat.selectedIndex].value;
+      var sequence = seq.options[seq.selectedIndex].value;
+      fetchSequenceData(
+        dataset,
+        sequence,
+        function(loaded, total) {
+          console.log("Progress: " + Number.parseFloat((loaded/total)*100).toFixed(1) + "%");
+        },
+        function(json) {
+          //console.log(json)
+        },
+        function(err) {
+          console.log(err)
+        }
+      );
+      // load sequence
+      // load trajectory
+      // compute metric
+      // show result
+      trajectory_element.value = '';
+    };
+  })(
+    dataset_element,
+    sequence_element,
+    format_element,
+    trajectory_element
+  );
+  refreshSequences();
+  showFormatExample();
+  dataset_element.addEventListener('change', refreshSequences, false);
+  format_element.addEventListener('change', showFormatExample, false);
+  trajectory_element.addEventListener('change', evalTrajectory, false);
+</script>
+
+<!--
+<script>
+  function loadTrajectory(e) {
+    var files = e.target.files;
+    if (files.length == 0) return;
+    var trajfile = files[0];
+    var reader = new FileReader();
+    reader.onload = (function(f) {
+        return function(e) {
+            console.log(e.target.result);
+        };
+    })(trajfile);
+    reader.readAsText(trajfile);
+  }
+  document.getElementById('trajectory').addEventListener('change', loadTrajectory, false);
+</script>
+
 <div id="plot_canvas" style="width:100%;height:500px;"></div>
+-->
+
+<!--
 <script>
   const urlParams = new URLSearchParams(window.location.search);
   const group = urlParams.get('group');
@@ -43,3 +243,4 @@ scripts: [ "https://cdn.plot.ly/plotly-latest.min.js" ]
     Plotly.Plots.resize('plot_canvas');
   };
 </script>
+-->
