@@ -1,0 +1,20 @@
+---
+permalink: /datasets/experiment/experiment-0/index.json
+---
+{
+    "sensors": [
+        {
+            "name": "camera",
+            "q_bs": [ 0, 0, 0, 1 ],
+            "p_bs": [ 0, 0, 0 ]
+        },
+        {
+            "name": "imu",
+            "q_bs": [ 0, 0, 0, 1 ],
+            "p_bs": [ 0, 0, 0 ]
+        }
+    ],
+    "trajectory": [
+        { "t": 0, "q": [ 0, 0, 0, 1 ], "p": [ 0, 0, 0 ] }
+    ]
+}

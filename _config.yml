@@ -9,6 +9,12 @@ baseurl:            ''
 
 ### Site Configuration
 
+# Collections
+collections:
+  datasets:
+    output: true
+
+
 # Assets
 assets:
   styles:           /assets/styles
