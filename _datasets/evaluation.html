@@ -2,7 +2,8 @@
 layout: page
 title: SLAM Evaluation
 permalink: /evaluation/
-# scripts:
+scripts:
+  - name: "nanobar.min"
 #   - name: "plotly.min"
 #   - name: "progressbar.min"
 comment: false
@@ -114,6 +115,9 @@ datasets:
     {% endfor %}
     };
 
+    var progressbar = new Nanobar();
+    progressbar.go(0);
+
     function clearOptions(ce) {
       while(ce.length > 0) {
         ce.remove(0);
@@ -140,13 +144,22 @@ datasets:
     }
 
     function requestSequence(url) {
+      var pseudo_remaining = 100;
       var xhr = new XMLHttpRequest();
       xhr.open('GET', url, true);
       xhr.onprogress = function(e) {
-        console.log('Progress: ' + Number.parseFloat(e.loaded/e.total*100).toFixed(1) + '%');
+        var progress = 0;
+        if(e.lengthComputable) {
+          progress = 100 * e.loaded/e.total;
+        } else {
+          pseudo_remaining = pseudo_remaining * (0.93 + Math.random() * 0.04);
+          progress = 100 - pseudo_remaining;
+        }
+        progressbar.go(Math.max(progress, 1.0));
       };
       xhr.onload = function(e) {
         if(xhr.readyState === 4 && xhr.status === 200) {
+          progressbar.go(100);
           json_data = JSON.parse(xhr.responseText);
           for(r in json_data.sensors) {
             appendOption(re, r, json_data.sensors[r].name);
@@ -155,10 +168,16 @@ datasets:
         } else {
           console.error(xhr.statusText);
         }
+        progressbar.go(0);
+      };
+      xhr.onabort = function(e) {
+        progressbar.go(0);
       };
       xhr.onerror = function(e) {
         console.error(xhr.statusText);
+        progressbar.go(0);
       };
+      progressbar.go(1);
       xhr.send(null);
       return xhr;
     }
