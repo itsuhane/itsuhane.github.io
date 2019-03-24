@@ -5,6 +5,7 @@ permalink: /evaluation/
 # scripts:
 #   - name: "plotly.min"
 #   - name: "progressbar.min"
+comment: false
 datasets:
   - id: "euroc"
     name: "EuRoC"
@@ -37,8 +38,14 @@ datasets:
   display: inline-block;
   width: 48%;
 }
-select, input {
-  width: 80%;
+.bicolumn select {
+  width: 100%;
+}
+.bicolumn input {
+  width: 100%;
+}
+.bicolumn dd {
+  margin-inline-end: 40px;
 }
 @media (max-width: 30em) {
   .bicolumn {
@@ -61,6 +68,9 @@ select, input {
   <dt><label for="sequence">Sequence</label></dt>
   <dd><select name="sequence" id="sequence">
   </select></dd>
+  <dt><label for="reference">Reference</label></dt>
+  <dd><select name="reference" id="reference">
+  </select></dd>
 </dl>
 </div><div class="bicolumn">
 <dl>
@@ -69,119 +79,248 @@ select, input {
     <option value="tum">TUM</option>
     <option value="csv">CSV</option>
   </select></dd>
+  <dt><label for="label">Label <small>(Optional)</small></label></dt>
+  <dd><input type="text" name="label" id="label" placeholder="&lt;trajectory file name&gt;" /></dd>
   <dt><label for="trajectory">Trajectory</label></dt>
   <dd><input type="file" name="trajectory" id="trajectory" /></dd>
 </dl>
 </div>
 <div class="highlight">
-  Trajectory File Format
+  Trajectory Format Example
   <pre id="example" class="highlight"></pre>
 </div>
+<p>
+  The evaluation is done at browser-side. This page does not upload any information. And the results won't be saved.
+</p>
 <script>
   var dataset_element = document.getElementById('dataset');
   var sequence_element = document.getElementById('sequence');
+  var reference_element = document.getElementById('reference');
+  var label_element = document.getElementById('label');
   var format_element = document.getElementById('format');
   var trajectory_element = document.getElementById('trajectory');
   var example_element = document.getElementById('example');
 
-  var datasets = {
-  {% for dataset in page.datasets %}
-    '{{ dataset.id }}': {
-    {% for sequence in dataset.sequences %}
-      '{{ sequence.id }}': {
-        'name': '{{ sequence.name }}'
+  var eval = (function(de, se, re, fe, le, te, ee) {
+    var datasets = {
+    {% for dataset in page.datasets %}
+      '{{ dataset.id }}': {
+      {% for sequence in dataset.sequences %}
+        '{{ sequence.id }}': {
+          'name': '{{ sequence.name }}'
+        },
+      {% endfor %}
       },
     {% endfor %}
-    },
-  {% endfor %}
-  };
+    };
 
-  function fetchSequenceData(dataset, sequence, progress, success, error) {
-    var xhr = new XMLHttpRequest();
-    var url = "/datasets/"+dataset+"/"+sequence+"/";
-    xhr.open("GET", url, true);
-    xhr.onprogress = function(e) {
-      progress(e.loaded, e.total);
-    };
-    xhr.onload = function(e) {
-      if(xhr.readyState === 4 && xhr.status === 200) {
-        success(xhr.responseText);
-      } else {
-        error(xhr.statusText);
+    function clearOptions(ce) {
+      while(ce.length > 0) {
+        ce.remove(0);
       }
-    };
-    xhr.onerror = function(e) {
-      error(xhr.statusText);
-    };
-    xhr.send(null);
-  }
+    }
 
-  var refreshSequences = (function (d,dat,seq) {
-    return function() {
-      while(seq.length > 0) {
-        seq.remove(0);
+    function appendOption(ce,v,t) {
+      var option = document.createElement('option');
+      option.value = v;
+      option.text = t;
+      ce.add(option);
+    }
+
+    function refreshSequences() {
+      clearOptions(se);
+      appendOption(se, '(sequence)', '(select sequence)');
+      se.disabled = true;
+      var sequences = datasets[de.options[de.selectedIndex].value]
+      for(s in sequences) {
+        appendOption(se, s, sequences[s].name);
+        se.disabled = false;
       }
-      var sequences = d[dat.options[dat.selectedIndex].value]
-      for (s in sequences) {
-        var option = document.createElement("option");
-        option.value = s;
-        option.text = sequences[s].name;
-        seq.add(option);
+      refreshReferences();
+    }
+
+    function requestSequence(url) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', url, true);
+      xhr.onprogress = function(e) {
+        console.log('Progress: ' + Number.parseFloat(e.loaded/e.total*100).toFixed(1) + '%');
+      };
+      xhr.onload = function(e) {
+        if(xhr.readyState === 4 && xhr.status === 200) {
+          json_data = JSON.parse(xhr.responseText);
+          for(r in json_data.sensors) {
+            appendOption(re, r, json_data.sensors[r].name);
+          }
+          re.disabled = false;
+        } else {
+          console.error(xhr.statusText);
+        }
+      };
+      xhr.onerror = function(e) {
+        console.error(xhr.statusText);
+      };
+      xhr.send(null);
+      return xhr;
+    }
+
+    var xhr;
+    var json_data;
+    function refreshReferences() {
+      clearOptions(re);
+      appendOption(re, '(reference)', '(select reference)');
+      json_data = null;
+      re.disabled = true;
+      if(xhr) {
+        xhr.abort();
       }
-    };
-  })(
-    datasets,
-    dataset_element,
-    sequence_element
-  );
-  var showFormatExample = (function(fmt,example) {
-    return function() {
-      var format = (fmt.options[fmt.selectedIndex].value);
-      if (format=='tum') {
+      var sequence = se.options[se.selectedIndex].value;
+      if(sequence==='(sequence)') return;
+      var dataset = de.options[de.selectedIndex].value;
+      var url = '/datasets/'+dataset+'/'+sequence+'/';
+      xhr = requestSequence(url);
+    }
+
+    function refreshFormatExample() {
+      var format = (fe.options[fe.selectedIndex].value);
+      if(format==='tum') {
         example.textContent = '<t[s]> <p.x[m]> <p.y[m]> <p.z[m]> <q.x> <q.y> <q.z> <q.w>';
       }
-      if (format=='csv') {
+      if(format==='csv') {
         example.textContent = '<t[s]>, <p.x[m]>, <p.y[m]>, <p.z[m]>, <q.x>, <q.y>, <q.z>, <q.w>';
       }
-    };
-  })(
-    format_element,
-    example_element
-  );
-  var evalTrajectory = (function(dat, seq, fmt, traj) {
-    return function(e) {
-      var dataset = dat.options[dat.selectedIndex].value;
-      var sequence = seq.options[seq.selectedIndex].value;
-      fetchSequenceData(
-        dataset,
-        sequence,
-        function(loaded, total) {
-          console.log("Progress: " + Number.parseFloat((loaded/total)*100).toFixed(1) + "%");
-        },
-        function(json) {
-          //console.log(json)
-        },
-        function(err) {
-          console.log(err)
-        }
-      );
-      // load sequence
-      // load trajectory
-      // compute metric
-      // show result
-      trajectory_element.value = '';
-    };
+    }
+
+    de.addEventListener('change', refreshSequences, false);
+    se.addEventListener('change', refreshReferences, false);
+    fe.addEventListener('change', refreshFormatExample, false);
+    refreshSequences();
+    refreshFormatExample();
+
+    return { sequenceData: function() { return json_data; } };
   })(
     dataset_element,
     sequence_element,
+    reference_element,
     format_element,
-    trajectory_element
+    label_element,
+    trajectory_element,
+    example_element
   );
-  refreshSequences();
-  showFormatExample();
-  dataset_element.addEventListener('change', refreshSequences, false);
-  format_element.addEventListener('change', showFormatExample, false);
-  trajectory_element.addEventListener('change', evalTrajectory, false);
+
+  // function fetchSequenceData(dataset, sequence, progress, success, error) {
+  //   var xhr = new XMLHttpRequest();
+  //   var url = "/datasets/"+dataset+"/"+sequence+"/";
+  //   xhr.open("GET", url, true);
+  //   xhr.onprogress = function(e) {
+  //     progress(e.loaded, e.total);
+  //   };
+  //   xhr.onload = function(e) {
+  //     if(xhr.readyState === 4 && xhr.status === 200) {
+  //       success(xhr.responseText);
+  //     } else {
+  //       error(xhr.statusText);
+  //     }
+  //   };
+  //   xhr.onerror = function(e) {
+  //     error(xhr.statusText);
+  //   };
+  //   xhr.send(null);
+  // }
+
+  // var fetchSequence = function(dataset, sequence) {
+  // };
+
+  // var refreshSequences = (function (d,dat,seq) {
+  //   return function() {
+  //     while(seq.length > 0) {
+  //       seq.remove(0);
+  //     }
+
+  //     var option = document.createElement("option");
+  //     option.value = '(sequence)';
+  //     option.text = '(select sequence)';
+  //     seq.add(option);
+
+  //     var sequences = d[dat.options[dat.selectedIndex].value]
+  //     for (s in sequences) {
+  //       var option = document.createElement("option");
+  //       option.value = s;
+  //       option.text = sequences[s].name;
+  //       seq.add(option);
+  //     }
+
+  //     refreshReferences();
+  //   };
+  // })(
+  //   datasets,
+  //   dataset_element,
+  //   sequence_element
+  // );
+
+  // var refreshReferences = (function (seq, ref) {
+  //   while(ref.length > 0) {
+  //     ref.remove(0);
+  //   }
+
+  //   var option = document.createElement("option");
+  //   option.value = '(reference)';
+  //   option.text = '(select reference)';
+  //   ref.add(option);
+
+  //   ref.disabled = true;
+  // })(
+  //   sequence_element,
+  //   reference_element
+  // );
+
+  // var showFormatExample = (function(fmt,example) {
+  //   return function() {
+  //     var format = (fmt.options[fmt.selectedIndex].value);
+  //     if (format==='tum') {
+  //       example.textContent = '<t[s]> <p.x[m]> <p.y[m]> <p.z[m]> <q.x> <q.y> <q.z> <q.w>';
+  //     }
+  //     if (format==='csv') {
+  //       example.textContent = '<t[s]>, <p.x[m]>, <p.y[m]>, <p.z[m]>, <q.x>, <q.y>, <q.z>, <q.w>';
+  //     }
+  //   };
+  // })(
+  //   format_element,
+  //   example_element
+  // );
+  // var evalTrajectory = (function(dat, seq, fmt, traj) {
+  //   return function(e) {
+  //     var dataset = dat.options[dat.selectedIndex].value;
+  //     var sequence = seq.options[seq.selectedIndex].value;
+  //     fetchSequenceData(
+  //       dataset,
+  //       sequence,
+  //       function(loaded, total) {
+  //         console.log("Progress: " + Number.parseFloat((loaded/total)*100).toFixed(1) + "%");
+  //       },
+  //       function(json) {
+  //         //console.log(json)
+  //       },
+  //       function(err) {
+  //         console.log(err)
+  //       }
+  //     );
+  //     // load sequence
+  //     // load trajectory
+  //     // compute metric
+  //     // show result
+  //     trajectory_element.value = '';
+  //   };
+  // })(
+  //   dataset_element,
+  //   sequence_element,
+  //   format_element,
+  //   trajectory_element
+  // );
+  // refreshSequences();
+  // showFormatExample();
+  // dataset_element.addEventListener('change', refreshSequences, false);
+  // format_element.addEventListener('change', showFormatExample, false);
+  // trajectory_element.addEventListener('change', evalTrajectory, false);
 </script>
 
 <!--
@@ -244,3 +383,4 @@ select, input {
   };
 </script>
 -->
+{% include features/disqus %}
