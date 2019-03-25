@@ -57,7 +57,10 @@ datasets:
     margin: 0;
   }
 }
-.error-plot {
+.plot {
+  margin: 8px 0;
+}
+.plot-flat {
   height: 96px;
 }
 </style>
@@ -432,12 +435,10 @@ datasets:
         // '  median: ' + Number.parseFloat(q_stat.median).toFixed(5),
       ];
       ie.textContent = messages.join('\n');
-      while(pc.firstChild) {
-          pc.removeChild(pc.firstChild);
-      }
 
       var traj_plot = document.createElement('div');
       traj_plot.id = 'traj-plot';
+      traj_plot.className = 'plot';
       pc.appendChild(traj_plot);
       let rttraj = traj.map(u => add(rotate(sim.Q, u.p_ws), sim.T));
       Plotly.plot(traj_plot,  [{
@@ -472,7 +473,7 @@ datasets:
 
       var error_plot = document.createElement('div');
       error_plot.id = 'error-plot';
-      error_plot.className = 'error-plot';
+      error_plot.className = 'plot plot-flat';
       pc.appendChild(error_plot);
       Plotly.plot(error_plot, [{
         name: 'position error',
@@ -580,6 +581,7 @@ datasets:
     }
 
     function loadTrajectory(e) {
+      ie.textContent = 'Processing...';
       var files = e.target.files;
       if(files.length=== 0) return;
       var trajfile = files[0];
@@ -587,14 +589,46 @@ datasets:
       var reader = new FileReader();
       reader.onload = (function(f) {
         return function(e) {
+          while(pc.firstChild) {
+            pc.removeChild(pc.firstChild);
+          }
+
           var traj = e.target.result
             .split('\n')
             .map(parsers[fe.options[fe.selectedIndex].value])
             .map(array2traj)
             .filter(function(v) { return v!== null;});
-          var sensor = sequencedata.sensors[re.options[re.selectedIndex].value];
-          var gttraj = body2sensor(traj.map(u => sampleFromSequence(sequencedata, u.t)), sensor);
-          evaluateTrajectory(label, gttraj, traj);
+
+          let gt_time_range = [
+            sequencedata.trajectory[0].t,
+            sequencedata.trajectory[sequencedata.trajectory.length - 1].t
+          ];
+
+          var time_range = [0, 0];
+          if(traj.length > 0) {
+            time_range = [
+              Math.max(traj[0].t, gt_time_range[0]),
+              Math.min(traj[traj.length - 1].t, gt_time_range[1])
+            ];
+          }
+
+          let gt_duration = gt_time_range[1] - gt_time_range[0];
+          let duration = time_range[1] - time_range[0];
+          if(duration / gt_duration > 0.2) {
+            var sensor = sequencedata.sensors[re.options[re.selectedIndex].value];
+            var gttraj = body2sensor(traj.map(u => sampleFromSequence(sequencedata, u.t)), sensor);
+            evaluateTrajectory(label, gttraj, traj);
+          } else {
+            let messages = [
+              'Trajectory does not align well with dataset.',
+              'Possible reasons:',
+              '  - trajectory format is wrong',
+              '  - wrong dataset selected',
+              '  - timestamp is not correct',
+              '  - incomplete trajectory'
+            ];
+            ie.textContent = messages.join('\n');
+          }
         };
       })(trajfile);
       reader.readAsText(trajfile);
