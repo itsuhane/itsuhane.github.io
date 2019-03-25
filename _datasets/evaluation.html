@@ -5,7 +5,7 @@ permalink: /evaluation/
 scripts:
   - name: "nanobar.min"
   - name: "jmat.min"
-  - name: "plotly.min"
+  - url: "https://cdn.plot.ly/plotly-latest.min.js"
 comment: false
 datasets:
   - id: "euroc"
@@ -57,6 +57,9 @@ datasets:
     margin: 0;
   }
 }
+.error-plot {
+  height: 96px;
+}
 </style>
 <div class="bicolumn">
 <dl>
@@ -95,7 +98,7 @@ datasets:
   The evaluation is done at browser-side. This page does not upload any information. And the results won't be saved.
 </p>
 <script>
-  var evaluation = (function(de, se, re, fe, le, te, ie) {
+  var evaluation = (function(de, se, re, fe, le, te, ie, pc) {
     var sequencedata;
 
     var datasets = {
@@ -429,7 +432,67 @@ datasets:
         // '  median: ' + Number.parseFloat(q_stat.median).toFixed(5),
       ];
       ie.textContent = messages.join('\n');
+      while(pc.firstChild) {
+          pc.removeChild(pc.firstChild);
+      }
+
+      var traj_plot = document.createElement('div');
+      traj_plot.id = 'traj-plot';
+      pc.appendChild(traj_plot);
+      let rttraj = traj.map(u => add(rotate(sim.Q, u.p_ws), sim.T));
+      Plotly.plot(traj_plot,  [{
+        name: dataset,
+        type: 'scatter3d',
+        mode: 'lines',
+        x: gttraj.map(u => u.p_ws[0]),
+        y: gttraj.map(u => u.p_ws[1]),
+        z: gttraj.map(u => u.p_ws[2]),
+        opacity: 1
+      },
+      {
+        name: label,
+        type: 'scatter3d',
+        mode: 'lines',
+        x: rttraj.map(u => u[0]),
+        y: rttraj.map(u => u[1]),
+        z: rttraj.map(u => u[2]),
+        opacity: 1
+      }], {
+        showlegend: true,
+        legend: {
+          x: 0,
+          y: 1
+        },
+        autosize: true,
+        margin: { l: 0, r: 0, b:0, t:0 },
+        scene: {
+          aspectmode: 'data'
+        }
+      }, { responsive:true });
+
+      var error_plot = document.createElement('div');
+      error_plot.id = 'error-plot';
+      error_plot.className = 'error-plot';
+      pc.appendChild(error_plot);
+      Plotly.plot(error_plot, [{
+        name: 'position error',
+        x: errors.map(x => x.t),
+        y: errors.map(x => x.p),
+        opacity: 1
+      }], {
+        showlegend: true,
+        legend: {
+          x: 0,
+          y: 1
+        },
+        autosize: true,
+        margin: { l: 0, r: 0, b:0, t:0 },
+        scene: {
+          aspectmode: 'data'
+        }
+      }, { responsive:true });
     }
+
 
     function refreshSequences() {
       clearOptions(se);
@@ -554,7 +617,8 @@ datasets:
     document.getElementById('format'),
     document.getElementById('label'),
     document.getElementById('trajectory'),
-    document.getElementById('information')
+    document.getElementById('information'),
+    document.getElementById('plot-container')
   );
 </script>
 
