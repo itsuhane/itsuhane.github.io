@@ -2,3 +2,4 @@ items:
 - { name: 'Home', url: '/' }
 - { name: 'Posts', url: '/posts' }
 - { name: 'Notes', url: '/notes' }
+- { name: 'Tools', url: '/tools'}
