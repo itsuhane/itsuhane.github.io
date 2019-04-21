@@ -1,7 +1,7 @@
 feed:               atom  # off/atom/rss
 seo:                true
 mathjax:            true
-google-analytics:   ''      # uncomment or leave it empty to turn off
+google-analytics:   'UA-138765494-1'
 read-time:          160
 share:              true
 related-posts:      false
