@@ -39,9 +39,19 @@ datasets:
   display: inline-block;
   width: 48%;
 }
+.bicolumn input[type="checkbox" i] {
+  width: auto !important;
+}
+.bicolumn dd label {
+  font-size: .8rem;
+}
 .bicolumn select, .bicolumn input {
   width: 100%;
   box-sizing: border-box;
+}
+.bicolumn dl {
+  margin-block-start: unset;
+  margin-block-end: unset;
 }
 .bicolumn dd {
   margin-inline-end: 40px;
@@ -61,7 +71,7 @@ datasets:
   margin: 8px 0;
 }
 .plot-flat {
-  height: 96px;
+  height: 128px;
 }
 </style>
 <div class="bicolumn">
@@ -88,10 +98,14 @@ datasets:
   </select></dd>
   <dt><label for="label">Label <small>(Optional)</small></label></dt>
   <dd><input type="text" name="label" id="label" placeholder="&lt;trajectory file name&gt;" /></dd>
-  <dt><label for="trajectory">Trajectory</label></dt>
-  <dd><input type="file" name="trajectory" id="trajectory" title="" /></dd>
+  <dt>Option</dt>
+  <dd><input type="checkbox" name="scale" id="scale" /><label for="scale">Visual-Only (Rescale Input)</label></dd>
 </dl>
 </div>
+<div class="bicolumn"><dl>
+    <dt><label for="trajectory">Trajectory</label></dt>
+    <dd><input type="file" name="trajectory" id="trajectory" title="" /></dd>
+</dl></div>
 <div class="highlight">
   Information
   <pre id="information" class="highlight"></pre>
@@ -101,7 +115,7 @@ datasets:
   The evaluation is done at browser-side. This page does not upload any information. And the results won't be saved.
 </p>
 <script>
-  var evaluation = (function(de, se, re, fe, le, te, ie, pc) {
+  var evaluation = (function(de, se, re, fe, le, sce, te, ie, pc) {
     var sequencedata;
 
     var datasets = {
@@ -357,7 +371,7 @@ datasets:
     }
 
     // (Q*traj1+T) = S*traj2
-    function umeyama(traj1, traj2, fix_scale) {
+    function umeyama(traj1, traj2) {
       let ps1 = traj1.map(u => u.p_ws);
       let ps2 = traj2.map(u => u.p_ws);
       let cog1 = scale(1.0/ps1.length, ps1.reduce((p, x) => add(p, x), [0, 0, 0]));
@@ -403,15 +417,23 @@ datasets:
       };
     }
 
-    function evaluateTrajectory(label, gttraj, traj) {
+    function evaluateTrajectory(label, prescale, gttraj, traj) {
       let sim = umeyama(traj, gttraj);
       let errors = traj.map(
         (u, i) => {
-          let dp = sub(scale(sim.S, gttraj[i].p_ws), add(rotate(sim.Q, u.p_ws), sim.T));
+          let dp = sub(prescale ? scale(sim.S, gttraj[i].p_ws) : gttraj[i].p_ws, add(rotate(sim.Q, u.p_ws), sim.T));
           let dq = logmap(mult(conjugate(mult(sim.Q, u.q_ws)), gttraj[i].q_ws));
           return { t: u.t, p: Math.sqrt(dot(dp, dp)), q: Math.sqrt(dot(dq, dq)) };
         }
       );
+      let T0 = sub(prescale ? scale(sim.S, gttraj[0].p_ws) : gttraj[0].p_ws, rotate(sim.Q, traj[0].p_ws));
+      let accum_errors = traj.map(
+        (u, i) => {
+          let dp = sub(prescale ? scale(sim.S, gttraj[i].p_ws) : gttraj[i].p_ws, add(rotate(sim.Q, u.p_ws), T0));
+          let dq = logmap(mult(conjugate(mult(sim.Q, u.q_ws)), gttraj[i].q_ws));
+          return { t: u.t, p: dp, q: dq };
+        }
+      )
       let p_errors = errors.map(x => x.p);
       let q_errors = errors.map(x => x.q);
       let p_stat = computeStats(p_errors);
@@ -421,7 +443,7 @@ datasets:
         'Dataset:  ' + dataset,
         'Label:    ' + label,
         'Scale:    ' + Number.parseFloat(sim.S).toFixed(5),
-        'APE:',
+        'APE ' + (prescale ? '(Pre-Scaled):' : ':'),
         '  rmse:   ' + Number.parseFloat(p_stat.rmse).toFixed(5),
         '  min:    ' + Number.parseFloat(p_stat.min).toFixed(5),
         '  max:    ' + Number.parseFloat(p_stat.max).toFixed(5),
@@ -475,19 +497,38 @@ datasets:
       error_plot.id = 'error-plot';
       error_plot.className = 'plot plot-flat';
       pc.appendChild(error_plot);
-      Plotly.plot(error_plot, [{
-        name: 'position error',
-        x: errors.map(x => x.t),
-        y: errors.map(x => x.p),
-        opacity: 1
-      }], {
+      Plotly.plot(error_plot, [
+        {
+          name: 'x-error',
+          x: accum_errors.map(x => x.t),
+          y: accum_errors.map(x => x.p[0]),
+          opacity: 1,
+          line: { color: '#c00' }
+        },
+        {
+          name: 'y-error',
+          x: accum_errors.map(x => x.t),
+          y: accum_errors.map(x => x.p[1]),
+          opacity: 1,
+          line: { color: '#0c0' }
+        },
+        {
+          name: 'z-error',
+          x: accum_errors.map(x => x.t),
+          y: accum_errors.map(x => x.p[2]),
+          opacity: 1,
+          line: { color: '#00c' }
+        }
+      ], {
         showlegend: true,
         legend: {
           x: 0,
-          y: 1
+          y: 1,
+          yanchor: 'bottom',
+          orientation: 'h'
         },
         autosize: true,
-        margin: { l: 0, r: 0, b:0, t:0 },
+        margin: { l: 0, r: 0, b:0, t:32 },
         scene: {
           aspectmode: 'data'
         }
@@ -586,6 +627,7 @@ datasets:
       if(files.length=== 0) return;
       var trajfile = files[0];
       var label = le.value ? le.value : trajfile.name;
+      var prescale = sce.checked;
       var reader = new FileReader();
       reader.onload = (function(f) {
         return function(e) {
@@ -617,7 +659,7 @@ datasets:
           if(duration / gt_duration > 0.2) {
             var sensor = sequencedata.sensors[re.options[re.selectedIndex].value];
             var gttraj = body2sensor(traj.map(u => sampleFromSequence(sequencedata, u.t)), sensor);
-            evaluateTrajectory(label, gttraj, traj);
+            evaluateTrajectory(label, prescale, gttraj, traj);
           } else {
             let messages = [
               'Trajectory does not align well with dataset.',
@@ -650,6 +692,7 @@ datasets:
     document.getElementById('reference'),
     document.getElementById('format'),
     document.getElementById('label'),
+    document.getElementById('scale'),
     document.getElementById('trajectory'),
     document.getElementById('information'),
     document.getElementById('plot-container')
