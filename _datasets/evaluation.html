@@ -137,9 +137,6 @@ datasets:
 <dl>
   <dt><label for="dataset">Dataset</label></dt>
   <dd><select name="dataset" id="dataset">
-  {% for dataset in page.datasets %}
-    <option value="{{ dataset.id }}">{{ dataset.name }}</option>
-  {% endfor %}
   </select></dd>
   <dt><label for="sequence">Sequence</label></dt>
   <dd><select name="sequence" id="sequence">
@@ -152,11 +149,9 @@ datasets:
 <dl>
   <dt><label for="format">Format</label></dt>
   <dd><select name="format" id="format">
-    <option value="tum">TUM</option>
-    <option value="csv">CSV</option>
   </select></dd>
   <dt><label for="label">Label <small>(Optional)</small></label></dt>
-  <dd><input type="text" name="label" id="label" placeholder="&lt;trajectory file name&gt;" /></dd>
+  <dd><input type="text" name="label" id="label" placeholder="default: &lt;trajectory file name&gt;" /></dd>
   <dt>Option</dt>
   <dd><input type="checkbox" name="scale" id="scale" /><label for="scale">Visual-Only (Rescale Input)</label></dd>
 </dl>
@@ -167,7 +162,7 @@ datasets:
 </dl></div>
 <div class="highlight">
   Information
-  <pre id="information" class="highlight"></pre>
+  <pre id="info-container" class="highlight"></pre>
 </div>
 <div id="plot-container"></div>
 <p>
@@ -176,6 +171,7 @@ datasets:
 <p>
   Contribute by <a href="https://github.com/itsuhane/itsuhane.github.io/issues/new?labels=slam-evaluation">creating an issue</a>.
 </p>
+<!--
 <script>
   var evaluation = (function(de, se, re, fe, le, sce, te, ie, pc) {
     var sequencedata;
@@ -739,13 +735,13 @@ datasets:
       te.value = '';
     }
 
-    de.addEventListener('change', refreshSequences, false);
-    se.addEventListener('change', refreshReferences, false);
-    fe.addEventListener('change', refreshFormatInformation, false);
-    re.addEventListener('change', refreshChooser, false);
-    te.addEventListener('change', loadTrajectory, false);
-    refreshSequences();
-    refreshFormatInformation();
+    // de.addEventListener('change', refreshSequences, false);
+    // se.addEventListener('change', refreshReferences, false);
+    // fe.addEventListener('change', refreshFormatInformation, false);
+    // re.addEventListener('change', refreshChooser, false);
+    // te.addEventListener('change', loadTrajectory, false);
+    // refreshSequences();
+    // refreshFormatInformation();
 
     return true;
   })(
@@ -760,5 +756,18 @@ datasets:
     document.getElementById('plot-container')
   );
 </script>
-
+-->
+<script>
+    document.datasets = {
+      {% for dataset in page.datasets %}'{{ dataset.id }}': {
+        'name': '{{ dataset.name }}',
+        'sequences': {
+          {% for sequence in dataset.sequences %}'{{ sequence.id }}': {
+            'name': '{{ sequence.name }}'
+          },{% endfor %}
+        }
+      },{% endfor %}
+    };
+</script>
+{% include assets/script name="evaluation" %}
 {% include features/disqus %}
