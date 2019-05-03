@@ -2,6 +2,8 @@
 permalink: "/datasets/euroc/mh-05/index.json"
 ---
 {
+  "name": "MH_05_difficult",
+  "dataset" : "EuRoC",
   "sensors": {
     "camera": {
       "name": "Camera",
@@ -14,7 +16,7 @@ permalink: "/datasets/euroc/mh-05/index.json"
       "p_bs": [ 0.0, 0.0, 0.0 ]
     }
   },
-  "trajectories": [
+  "segments": [
     [
       { "t": 1.403638519492829527e+09, "q_wb": [ -7.576100e-01, -3.486290e-01, -4.977110e-01, 2.382610e-01 ], "p_wb": [ 4.460675e+00, -1.680515e+00, 5.796140e-01 ] },
       { "t": 1.403638519497829463e+09, "q_wb": [ -7.576160e-01, -3.486210e-01, -4.977090e-01, 2.382610e-01 ], "p_wb": [ 4.460706e+00, -1.680523e+00, 5.795920e-01 ] },

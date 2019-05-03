@@ -2,6 +2,8 @@
 permalink: "/datasets/euroc/v2-02/index.json"
 ---
 {
+  "name": "V2_02_medium",
+  "dataset" : "EuRoC",
   "sensors": {
     "camera": {
       "name": "Camera",
@@ -14,7 +16,7 @@ permalink: "/datasets/euroc/v2-02/index.json"
       "p_bs": [ 0.0, 0.0, 0.0 ]
     }
   },
-  "trajectories": [
+  "segments": [
     [
       { "t": 1.413393887225760600e+09, "q_wb": [ 2.237400e-02, -8.051470e-01, 2.401900e-02, 5.921660e-01 ], "p_wb": [ -1.001979e+00, 4.793020e-01, 1.329542e+00 ] },
       { "t": 1.413393887230760536e+09, "q_wb": [ 2.232900e-02, -8.051550e-01, 2.398400e-02, 5.921590e-01 ], "p_wb": [ -1.002130e+00, 4.792950e-01, 1.329533e+00 ] },
