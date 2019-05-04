@@ -1,6 +1,6 @@
 {% for post in paginator.posts %}
 <div class="posts">
-  {% include post title=post.title url=post.url date=post.date content=post.content %}
+  {% include post title=post.title url=post.url date=post.date content=post.content nofollow=true %}
 </div>
 {% endfor %}
 <!-- Pagination links -->

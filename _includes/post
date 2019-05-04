@@ -1,6 +1,6 @@
 <h1>
-{%if include.url %}
-<a href="{{ site.url }}{{ site.baseurl }}{{ include.url }}">{{ include.title }}</a>
+{% if include.url %}
+<a href="{{ site.url }}{{ site.baseurl }}{{ include.url }}" {% if include.nofollow %}rel="nofollow"{% endif %}>{{ include.title }}</a>
 {% else %}
 {{ include.title }}
 {% endif %}

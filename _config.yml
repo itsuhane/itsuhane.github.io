@@ -13,7 +13,8 @@ baseurl:            ''
 collections:
   datasets:
     output: true
-
+  switchkey:
+    output: true
 
 # Assets
 assets:
