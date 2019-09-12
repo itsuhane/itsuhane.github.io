@@ -2,9 +2,9 @@ encoding:           utf-8
 lang:               zh-cn
 
 # Site Information
-title:              Epipolar
+title:              Jinyu Li
 description:        a personal journal
-url:                https://itsuhane.github.io
+url:                https://jinyu.li
 baseurl:            ''
 
 ### Site Configuration
