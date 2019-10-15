@@ -1,7 +1,11 @@
 <div class="menu">
-  <nav class="menu-content">    
+  <nav class="menu-content">
     {% for item in site.data.menu.items %}
-    <a href="{{ site.url }}{{ site.baseurl }}{{ item.url }}">{{ item.name }}</a>
+        {% if item.external %}
+            <a href="{{ item.url }}">{{ item.name }}</a>
+        {% else %}
+            <a href="{{ site.url }}{{ site.baseurl }}{{ item.url }}">{{ item.name }}</a>
+        {% endif %}
     {% endfor %}
   </nav>
   <nav class="social-icons">
