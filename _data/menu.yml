@@ -2,4 +2,4 @@ items:
 - { name: 'Home', url: '/' }
 - { name: 'Posts', url: '/posts' }
 - { name: 'Notes', url: 'https://www.notion.so/Notes-7c2ba690ce35412c9d5e8458afbb5b4c', external: true }
-- { name: 'Tools', url: '/tools'}
+- { name: 'Tools', url: '/tools' }
