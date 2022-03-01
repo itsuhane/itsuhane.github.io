@@ -9,7 +9,7 @@
   {% include assets/style url="https://fonts.googleapis.com/css?family=Source+Code+Pro" %}
   {% include assets/style url="https://fonts.googleapis.com/css?family=Quattrocento+Sans" %}
   {% include assets/style url="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" %}
-  {% include features/mathjax %}
+  {% include features/latex %}
   {% include features/google-analytics %}
   {% include features/seo %}
   {% if page.scripts %}

@@ -1,0 +1,2 @@
+"\\given": "\\mid",
+"\\norm": "\\left\\lvert #2 \\right\\rvert_{\\text{#1}}",

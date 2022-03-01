@@ -1,6 +1,6 @@
 feed:               atom  # off/atom/rss
 seo:                true
-mathjax:            true
+latex:              true
 google-analytics:   'UA-138765494-1'
 read-time:          160
 share:              true
