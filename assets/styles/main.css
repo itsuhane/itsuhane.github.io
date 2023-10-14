@@ -350,14 +350,19 @@ table {
   margin-bottom: 30px;
   width: 100%;
 }
-
 table, th, td {
-  border: 1px solid black;
+  border: none;
 }
-
-th, td {
-  padding: 15px;
+table > :is(thead, tbody) > tr > :is(th, td) {
+  padding: 5px;
   text-align: left;
+}
+table > thead > tr > :is(th, td) {
+  border-top: 2px solid;
+  border-bottom: 1px solid;
+}
+table > tbody > tr:last-child > :is(th, td) {
+  border-bottom: 2px solid;
 }
 
 /*
